@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:university_graduate_project/screens/chat_screen.dart';
 import 'package:university_graduate_project/screens/home_screen.dart';
 void main()
 {

@@ -3,6 +3,8 @@ import 'package:chat_bubbles/bubbles/bubble_normal_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 
+import '../../utilis/color.dart';
+
 class MessageContainer extends StatefulWidget {
   final String message;
   final File? image;
@@ -91,8 +93,8 @@ class _MessageContainerState extends State<MessageContainer> {
       padding: widget.type == "audio" ? null : const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: widget.type == 'audio' ? null : BoxDecoration(
         color: widget.isSender
-            ? const Color(0xFFDDE5E5)
-            : const Color(0xFFA8BBB3),
+            ? secondaryColor
+            : primaryColor,
         borderRadius: BorderRadius.only(
           topLeft: const Radius.circular(30),
           topRight: const Radius.circular(30),

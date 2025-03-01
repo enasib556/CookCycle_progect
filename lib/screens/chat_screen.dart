@@ -2,7 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../widgets/chat_widgets/container_text.dart';
+import '../utilis/color.dart';
+import '../widgets/chat_widgets/custom_chat.dart';
 import 'home_screen.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -25,6 +26,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -35,7 +37,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: Container(
                     height: 140,
                     width: double.infinity,
-                    color: const Color(0xFFA8BBB3),
+                    color:  primaryColor,
                   ),
                 ),
                 Positioned(
@@ -49,22 +51,26 @@ class _ChatScreenState extends State<ChatScreen> {
                 Positioned(
                   top: 50, // Adjust the top position as per your requirement
                   left: 10, // Adjust the left position as per your requirement
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.white),
-                    onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()), // استبدل YourFirstScreen باسم الشاشة الأولى
-                            (route) => false, // إزالة كل الشاشات السابقة
-                      );
-                    },
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Colors.white,
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_back, color: primaryColor),
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomeScreen()), // استبدل YourFirstScreen باسم الشاشة الأولى
+                              (route) => false, // إزالة كل الشاشات السابقة
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],
             ),
             SizedBox(
-              height: 620,
-              child: ContainerText(onImageSelected: _pickImage),
+              height: 630,
+              child: CustomChat(onImageSelected: _pickImage),
             ),
             if (_selectedImage != null)
               Padding(

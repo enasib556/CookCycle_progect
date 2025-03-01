@@ -4,16 +4,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:record/record.dart';
 import 'package:audioplayers/audioplayers.dart'; // استيراد حزمة التشغيل الصوتي
+import 'package:university_graduate_project/widgets/chat_widgets/send_container.dart';
 import 'massege_container.dart';
 
-class ContainerText extends StatefulWidget {
-  const ContainerText({super.key, required Future<void> Function(ImageSource source) onImageSelected});
+class CustomChat extends StatefulWidget {
+  const CustomChat({super.key, required Future<void> Function(ImageSource source) onImageSelected});
 
   @override
-  State<ContainerText> createState() => _ContainerTextState();
+  State<CustomChat> createState() => _CustomChatState();
 }
 
-class _ContainerTextState extends State<ContainerText> {
+class _CustomChatState extends State<CustomChat> {
   TextEditingController messageController = TextEditingController();
   List<Map<String, dynamic>> messages = [];
   final Record _record = Record();
@@ -23,6 +24,7 @@ class _ContainerTextState extends State<ContainerText> {
   @override
   void initState() {
     super.initState();
+    // message bot in start
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         messages.add({
@@ -75,6 +77,7 @@ class _ContainerTextState extends State<ContainerText> {
         });
         messageController.clear();
       });
+      // اضافة رسالة البوت
       Future.delayed(const Duration(seconds: 1), () {
         setState(() {
           messages.insert(0, {
@@ -101,7 +104,7 @@ class _ContainerTextState extends State<ContainerText> {
           "time": DateTime.now().toString(), // إضافة الوقت
         });
       });
-
+      // اضافة رسالة البوت
       Future.delayed(const Duration(seconds: 1), () {
         setState(() {
           messages.insert(0, {
@@ -131,7 +134,7 @@ class _ContainerTextState extends State<ContainerText> {
             "time": DateTime.now().toString(), // إضافة الوقت
           });
         });
-
+        // اضافة رسالة البوت
         Future.delayed(const Duration(seconds: 1), () {
           setState(() {
             messages.insert(0, {
@@ -157,7 +160,7 @@ class _ContainerTextState extends State<ContainerText> {
       children: [
         Expanded(
           child: ListView.builder(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             reverse: true,
             itemCount: messages.length,
             itemBuilder: (context, index) {
@@ -178,64 +181,12 @@ class _ContainerTextState extends State<ContainerText> {
             },
           ),
         ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Material(
-            elevation: 4,
-            shadowColor: Colors.grey,
-            borderRadius: BorderRadius.circular(17),
-            child: Container(
-              width: 360,
-              height: 72,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                border: Border.all(color: const Color(0xFFA8BBB3)),
-                color: const Color(0xFFDDE5E5).withOpacity(0.8),
-                borderRadius: BorderRadius.circular(17),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      constraints: const BoxConstraints(minHeight: 42),
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFA8BBB3).withOpacity(0.72),
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      child: TextField(
-                        controller: messageController,
-                        maxLines: null,
-                        decoration: const InputDecoration(
-                          hintText: "Type your message",
-                          hintStyle: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.49),
-                              fontSize: 15),
-                          border: InputBorder.none,
-                        ),
-                        style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.49)),
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.send, color: Color(0xFF00643A), size: 24),
-                    onPressed: sendMessage,
-                  ),
-                  const SizedBox(width: 5),
-                  IconButton(
-                    icon: _isRecording
-                        ? const Icon(Icons.stop, color: Color(0xFF00643A), size: 24)
-                        : const Icon(Icons.mic, color: Color(0xFF00643A), size: 24),
-                    onPressed: _toggleRecording,
-                  ),
-                  const SizedBox(width: 5),
-                  IconButton(
-                    icon: SvgPicture.asset('assets/icons/Vector.svg'),
-                    onPressed: _showOption,
-                  ),
-                ],
-              ),
-            ),
-          ),
+        SendContainer(
+          messageController: messageController,
+          sendMessage: sendMessage,
+          toggleRecording: _toggleRecording,
+          isRecording: _isRecording,
+          showOption: _showOption,
         ),
       ],
     );
