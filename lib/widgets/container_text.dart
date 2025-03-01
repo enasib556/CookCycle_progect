@@ -64,7 +64,6 @@ class _ContainerTextState extends State<ContainerText> {
       ),
     );
   }
-
   void sendMessage() {
     if (messageController.text.isNotEmpty) {
       setState(() {
@@ -76,7 +75,6 @@ class _ContainerTextState extends State<ContainerText> {
         });
         messageController.clear();
       });
-
       Future.delayed(const Duration(seconds: 1), () {
         setState(() {
           messages.insert(0, {

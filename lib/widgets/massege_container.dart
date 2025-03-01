@@ -45,14 +45,11 @@ class _MessageContainerState extends State<MessageContainer> {
         // Rewind the audio to the start when it's completed
       }
     });
-
-    // Listen to the position of the audio
     _audioPlayer.onPositionChanged.listen((Duration duration) {
       setState(() {
         _position = duration;
       });
     });
-
     // Listen to the duration of the audio once it's loaded
     _audioPlayer.onDurationChanged.listen((Duration duration) {
       setState(() {

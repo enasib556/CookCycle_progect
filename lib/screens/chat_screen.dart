@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../widgets/container_text.dart';
+import 'home_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -51,7 +52,11 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.white),
                     onPressed: () {
-                      Navigator.pop(context); // Navigating back
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()), // استبدل YourFirstScreen باسم الشاشة الأولى
+                            (route) => false, // إزالة كل الشاشات السابقة
+                      );
                     },
                   ),
                 ),
