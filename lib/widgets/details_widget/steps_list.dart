@@ -10,7 +10,7 @@ class StepsList extends StatelessWidget {
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: recipes[0].steps.length,
+      itemCount: recipes[0].steps!.length,
       itemBuilder: (context, index) {
         return StepItem(index: index);
       },

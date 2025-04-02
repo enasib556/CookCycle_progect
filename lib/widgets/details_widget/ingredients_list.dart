@@ -16,9 +16,9 @@ class _IngredientsListState extends State<IngredientsList> {
     return  ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: recipes[0].ingredients.length,
+        itemCount: recipes[0].ingredients!.length,
         itemBuilder: (context, index) {
-          return  GradientItem(name: recipes[0].ingredients[index].name, quantity: recipes[0].ingredients[index].quantity,);
+          return  GradientItem(name: recipes[0].ingredients![index].name, quantity: recipes[0].ingredients![index].quantity,);
         });
   }
 }

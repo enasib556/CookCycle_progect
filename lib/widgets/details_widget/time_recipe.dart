@@ -16,7 +16,7 @@ class TimeRecipe extends StatelessWidget {
           Icon(Icons.access_time_outlined, color: primaryColor, size: 31),
           const SizedBox(width: 5),
           Text(
-            recipes[0].cookingTime,
+            recipes[0].cookingTime!,
             style: TextStyle(
               fontFamily: 'SansitaOne',
               fontSize: 18,

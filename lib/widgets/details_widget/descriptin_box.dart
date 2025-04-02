@@ -17,7 +17,7 @@ class DescriptinBox extends StatelessWidget {
           decoration: BoxDecoration(border: Border.all(color: primaryColor)),
           child: Center(
             child: Text(
-              recipes[0].description,
+              recipes[0].description!,
               style: TextStyle(
                 fontSize: 22,
                 color: primaryColor,

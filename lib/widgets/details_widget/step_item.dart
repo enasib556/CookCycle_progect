@@ -23,7 +23,7 @@ class StepItem extends StatelessWidget {
             textDirection: isOdd ? TextDirection.rtl : TextDirection.ltr, // تبديل الاتجاه
             children: [
               Image.asset(
-                recipes[0].steps[index].image,
+                recipes[0].steps![index].image,
                 width: 130,
                 height: 130,
               ),
@@ -36,7 +36,7 @@ class StepItem extends StatelessWidget {
                       SvgPicture.asset('assets/icons/chef.svg'),
                       const SizedBox(width: 10),
                       Text(
-                        'Step ${recipes[0].steps[index].stepNumber}/5',
+                        'Step ${recipes[0].steps![index].stepNumber}/5',
                         style: TextStyle(
                           fontFamily: 'SansitaOne',
                           fontSize: 17,
@@ -49,7 +49,7 @@ class StepItem extends StatelessWidget {
                   SizedBox(
                     width: 155,
                     child: Text(
-                      recipes[0].steps[index].description,
+                      recipes[0].steps![index].description,
                       style: TextStyle(
                         fontSize: 17,
                         color: Colors.black.withOpacity(0.5),

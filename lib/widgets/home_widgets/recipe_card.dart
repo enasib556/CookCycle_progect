@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:university_graduate_project/screens/details_screen.dart';
-import '../../models/recipe_model.dart';
+import 'package:university_graduate_project/widgets/home_widgets/recipe_word.dart';
+import '../../models/recipeModel.dart';
 import '../../utilis/color.dart';
 
 class RecipeCard extends StatelessWidget {
-  final RecipeCardModel recipe;
+  final RecipeModel recipe;
   const RecipeCard({super.key, required this.recipe});
 
   @override
@@ -21,14 +22,6 @@ class RecipeCard extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(25), // زوايا مستديرة
           color: Colors.white, // خلفية بيضاء
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.black26,
-          //     blurRadius: 0,
-          //     spreadRadius: 2,
-          //     offset: Offset(0, 3),
-          //   ),
-          // ],
         ),
         child: Stack(
           children: [
@@ -48,41 +41,9 @@ class RecipeCard extends StatelessWidget {
                 Padding(
                   padding:
                   const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
-                  child: Stack(
-                    children: [
-                      // النص الخارجي (حدود خضراء)
-                      Text(
-                        recipe.recipeName,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 13.5,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 2
-                            ..color = Colors.green.shade900,
-                        ),
-                      ),
-                      // النص الداخلي (لون أبيض)
-                      Text(
-                        recipe.recipeName,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 13.5,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: SizedBox(
+                      width: 150,
+                      child: Recipeword(text: recipe.name, fontSize: 13))
                 ),
                 SizedBox(height: 5),
               ],
@@ -90,7 +51,7 @@ class RecipeCard extends StatelessWidget {
             // أيقونة القلب في الأسفل على اليمين
             Positioned(
               right: 0,
-              bottom: 6,
+              bottom: 1,
               child: IconButton(
                 icon: Icon(Icons.favorite_border, color: Colors.grey, size: 26),
                 onPressed: () {},

@@ -10,7 +10,7 @@ class CatListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) => CartItem(recipe: recipes[0].ingredients[index],),
+      itemBuilder: (context, index) => CartItem(recipe: recipes[0].ingredients![index],),
       itemCount: 3,
       shrinkWrap: true,
     );
