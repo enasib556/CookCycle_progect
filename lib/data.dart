@@ -1,7 +1,6 @@
 import 'package:university_graduate_project/models/recipeModel.dart';
 
 import 'models/favourite_model.dart';
-import 'models/recipe_model.dart';
 
 List <RecipeModel> recipes = [
   RecipeModel(name: 'Classic Caesar Chicken', image: 'assets/images/salmon-salad-international.png',
@@ -37,42 +36,42 @@ List <RecipeModel> recipes = [
       ], cookingTime: '30 min')
 ];
 
-final List<RecipeCardModel> recipesList = [
-  RecipeCardModel(
-      recipeName: "Classic Caesar Chicken",
+final List<RecipeModel> recipesList = [
+  RecipeModel(
+      name: "Classic Caesar Chicken",
       image: "assets/images/test.jpg"),
-  RecipeCardModel(
-      recipeName: "Roasted Potato Salad",
+  RecipeModel(
+      name: "Roasted Potato Salad",
       image: "assets/images/test.jpg"),
-  RecipeCardModel(
-      recipeName: "Quinoa Tabbouleh",
+  RecipeModel(
+      name: "Quinoa Tabbouleh",
       image: "assets/images/test.jpg"),
-  RecipeCardModel(
-      recipeName: "Spicy Meatballs",
+  RecipeModel(
+      name: "Spicy Meatballs",
       image: "assets/images/test.jpg"),
-  RecipeCardModel(
-      recipeName: "Grilled Veggies",
+  RecipeModel(
+      name: "Grilled Veggies",
       image: "assets/images/test.jpg"),
-  RecipeCardModel(
-      recipeName: "Mediterranean Platter",
+  RecipeModel(
+      name: "Mediterranean Platter",
       image: "assets/images/test.jpg"),
-  RecipeCardModel(
-      recipeName: "Classic Caesar Chicken",
+  RecipeModel(
+      name: "Classic Caesar Chicken",
       image: "assets/images/test.jpg"),
-  RecipeCardModel(
-      recipeName: "Roasted Potato Salad",
+  RecipeModel(
+      name: "Roasted Potato Salad",
       image: "assets/images/test.jpg"),
-  RecipeCardModel(
-      recipeName: "Quinoa Tabbouleh",
+  RecipeModel(
+      name: "Quinoa Tabbouleh",
       image: "assets/images/test.jpg"),
-  RecipeCardModel(
-      recipeName: "Spicy Meatballs",
+  RecipeModel(
+      name: "Spicy Meatballs",
       image: "assets/images/test.jpg"),
-  RecipeCardModel(
-      recipeName: "Grilled Veggies",
+  RecipeModel(
+      name: "Grilled Veggies",
       image: "assets/images/test.jpg"),
-  RecipeCardModel(
-      recipeName: "Mediterranean Platter",
+  RecipeModel(
+      name: "Mediterranean Platter",
       image: "assets/images/test.jpg"),
 ];
 
