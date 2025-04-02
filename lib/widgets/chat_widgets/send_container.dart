@@ -63,11 +63,12 @@ class SendContainer extends StatelessWidget {
                         child: TextField(
                           controller: messageController,
                           maxLines: null,
-                          decoration: const InputDecoration(
+                          decoration:  InputDecoration(
                             hintText: "Type your message",
                             hintStyle: TextStyle(
-                              color: Color.fromRGBO(0, 0, 0, 0.49),
-                              fontSize: 15,
+                              fontFamily: 'SansitaOne',
+                              color: Colors.grey.shade600,
+                              fontSize: 14,
                             ),
                             border: InputBorder.none,
                           ),

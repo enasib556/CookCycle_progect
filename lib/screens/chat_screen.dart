@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../utilis/color.dart';
 import '../widgets/chat_widgets/custom_chat.dart';
+import '../widgets/chat_widgets/header_clipper.dart';
 import 'home_screen.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -59,7 +60,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context) => HomeScreen()), // استبدل YourFirstScreen باسم الشاشة الأولى
+                          MaterialPageRoute(builder: (context) => HomeScreen()),
                               (route) => false, // إزالة كل الشاشات السابقة
                         );
                       },
@@ -84,22 +85,3 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 }
 
-class HeaderClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    path.lineTo(0, size.height - 50);
-    path.quadraticBezierTo(
-      size.width / 2,
-      size.height * 1.2,
-      size.width,
-      size.height - 30,
-    );
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => true;
-}

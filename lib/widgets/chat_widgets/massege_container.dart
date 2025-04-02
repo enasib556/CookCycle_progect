@@ -109,8 +109,9 @@ class _MessageContainerState extends State<MessageContainer> {
               ? Text(
             widget.message,
             style: TextStyle(
+              fontFamily: 'SansitaOne',
               color: widget.isSender ? Colors.grey.shade700 : Colors.white,
-              fontSize: 16,
+              fontSize: 15,
             ),
           )
               : widget.type == "audio"

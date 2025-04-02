@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:record/record.dart';
 import 'package:audioplayers/audioplayers.dart'; // استيراد حزمة التشغيل الصوتي
@@ -8,7 +7,10 @@ import 'package:university_graduate_project/widgets/chat_widgets/send_container.
 import 'massege_container.dart';
 
 class CustomChat extends StatefulWidget {
-  const CustomChat({super.key, required Future<void> Function(ImageSource source) onImageSelected});
+  const CustomChat({
+    super.key,
+    required Future<void> Function(ImageSource source) onImageSelected,
+  });
 
   @override
   State<CustomChat> createState() => _CustomChatState();
@@ -28,7 +30,7 @@ class _CustomChatState extends State<CustomChat> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         messages.add({
-          "text": "مرحبًا! كيف يمكنني مساعدتك اليوم؟ 😊",
+          "text": " Hello ! How can I help you? 😊",
           "isSender": false,
           "type": "text",
           "time": DateTime.now().toString(), // إضافة الوقت
@@ -40,32 +42,51 @@ class _CustomChatState extends State<CustomChat> {
   void _showOption() {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('اختر مصدر الصورة'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.image),
-              title: const Text('المعرض'),
-              onTap: () {
-                Navigator.pop(context);
-                pickImage(ImageSource.gallery);
-              },
+      builder:
+          (context) => AlertDialog(
+            title: const Text(
+              'choose image source',
+              style: TextStyle(
+                fontFamily: 'SansitaOne',
+                color: Color(0xFF00643A),
+                fontSize: 20,
+              ),
             ),
-            ListTile(
-              leading: const Icon(Icons.camera),
-              title: const Text('الكاميرا'),
-              onTap: () {
-                Navigator.pop(context);
-                pickImage(ImageSource.camera);
-              },
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.image, color: Color(0xFF00643A)),
+                  title: const Text('gallery', style: TextStyle(
+                    fontFamily: 'SansitaOne',
+                    color: Color(0xFF00643A),
+                    fontSize: 15
+                  ),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    pickImage(ImageSource.gallery);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.camera, color: Color(0xFF00643A)),
+                  title: const Text('camera', style:  TextStyle(
+                    fontFamily: 'SansitaOne',
+                    color: Color(0xFF00643A),
+                    fontSize: 15,
+                  ),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    pickImage(ImageSource.camera);
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
     );
   }
+
   void sendMessage() {
     if (messageController.text.isNotEmpty) {
       setState(() {
@@ -81,7 +102,7 @@ class _CustomChatState extends State<CustomChat> {
       Future.delayed(const Duration(seconds: 1), () {
         setState(() {
           messages.insert(0, {
-            "text": "لقد تلقيت رسالتك! كيف يمكنني مساعدتك؟ 🤖",
+            "text": " I received your message! how can i help you? 🤖",
             "isSender": false,
             "type": "text",
             "time": DateTime.now().toString(), // إضافة الوقت
@@ -108,7 +129,7 @@ class _CustomChatState extends State<CustomChat> {
       Future.delayed(const Duration(seconds: 1), () {
         setState(() {
           messages.insert(0, {
-            "text": "لقد استلمت صورتك! 📷 شكرًا لإرسالها.",
+            "text": "I received your image! 📷 thank you for sending it.",
             "isSender": false,
             "type": "text",
             "time": DateTime.now().toString(), // إضافة الوقت
@@ -138,7 +159,7 @@ class _CustomChatState extends State<CustomChat> {
         Future.delayed(const Duration(seconds: 1), () {
           setState(() {
             messages.insert(0, {
-              "text": "لقد استلمت تسجيلك الصوتي! 🎤 شكرًا لإرساله.",
+              "text": "I received your audio! 🎤 thank you for sending it.",
               "isSender": false,
               "type": "text",
               "time": DateTime.now().toString(), // إضافة الوقت
@@ -166,9 +187,10 @@ class _CustomChatState extends State<CustomChat> {
             itemBuilder: (context, index) {
               final message = messages[index];
               return Align(
-                alignment: message["isSender"]
-                    ? Alignment.centerRight
-                    : Alignment.centerLeft,
+                alignment:
+                    message["isSender"]
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
                 child: MessageContainer(
                   message: message["text"] ?? "",
                   image: message["image"],
