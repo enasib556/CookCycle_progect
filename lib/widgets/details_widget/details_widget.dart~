@@ -1,0 +1,112 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:university_graduate_project/utilis/color.dart';
+import 'package:university_graduate_project/widgets/details_widget/header.dart';
+import 'package:university_graduate_project/widgets/details_widget/steps_list.dart';
+
+import '../../data.dart';
+import 'ingredients_list.dart';
+
+class DetailsWidget extends StatelessWidget {
+  const DetailsWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Header(),
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(Icons.access_time_outlined, color: primaryColor, size: 31),
+                const SizedBox(width: 5),
+                Text(
+                  recipes[0].cookingTime,
+                  style: TextStyle(
+                    fontFamily: 'SansitaOne',
+                    fontSize: 18,
+                    color: primaryColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 30),
+          Container(
+            width: 317,
+            height: 62,
+            decoration: BoxDecoration(border: Border.all(color: primaryColor)),
+            child: Center(
+              child: Text(
+                recipes[0].description,
+                style: TextStyle(
+                  fontSize: 22,
+                  color: primaryColor,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 40),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              children: [
+                Text(
+                  'Main Ingredients for Classic Caesar Chicken',
+                  style: TextStyle(
+                    fontFamily: 'SansitaOne',
+                    fontSize: 23,
+                    color: primaryColor,
+                  ),
+                ),
+                IngredientsList(),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primaryColor,
+                    minimumSize: Size(317, 66),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.shopping_cart_outlined,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      const SizedBox(width: 15),
+                      Text(
+                        'Add TO Shopping List',
+                        style: TextStyle(
+                          fontFamily: 'SansitaOne',
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Text(
+                  'Steps to Prepare Classic Caesar Chicken',
+                  style: TextStyle(
+                    fontFamily: 'SansitaOne',
+                    fontSize: 23,
+                    color: primaryColor,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                StepsList()
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
