@@ -39,3 +39,4 @@ class CustomRowForTotal extends StatelessWidget {
     );
   }
 }
+

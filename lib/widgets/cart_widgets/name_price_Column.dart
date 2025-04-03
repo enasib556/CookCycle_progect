@@ -63,3 +63,4 @@ class NamePriceColumn extends StatelessWidget {
     );
   }
 }
+

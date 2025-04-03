@@ -28,7 +28,6 @@ class _SplashScreenState extends State<SplashScreen>
     ).animate(animationController);
     animationController.forward();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

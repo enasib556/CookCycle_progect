@@ -80,3 +80,4 @@ class FavouriteCard extends StatelessWidget {
     );
   }
 }
+

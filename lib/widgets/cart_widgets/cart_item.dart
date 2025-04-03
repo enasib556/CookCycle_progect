@@ -42,6 +42,7 @@ class CartItem extends StatelessWidget {
             NamePriceColumn(recipe: recipe,),
             QuanitityCounter(),
             SizedBox(width: 17),
+
           ],
         ),
       ),

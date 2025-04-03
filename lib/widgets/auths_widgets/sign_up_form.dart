@@ -14,15 +14,15 @@ class SignUpForm extends StatelessWidget {
         key: ValueKey('signup'),
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          customTextField(
+          CustomTextField(
               label: "Email or Username", hint: "enter your email..."),
           SizedBox(height: 10),
-          customTextField(
+          CustomTextField(
               label: "Password",
               hint: "enter your password...",
               isPassword: true),
           SizedBox(height: 10),
-          customTextField(
+          CustomTextField(
               label: "Confirm Password",
               hint: "enter your password...",
               isPassword: true),

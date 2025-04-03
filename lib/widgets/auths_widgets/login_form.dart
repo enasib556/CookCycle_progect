@@ -14,9 +14,9 @@ class LoginForm extends StatelessWidget {
         key: ValueKey('login'),
         crossAxisAlignment: CrossAxisAlignment.center, // مركزية العناصر
         children: [
-          customTextField(label: "Email", hint: "enter your email..."),
+          CustomTextField(label: "Email", hint: "enter your email..."),
           SizedBox(height: 10),
-          customTextField(
+          CustomTextField(
               label: "Password", hint: "enter your password...", isPassword: true),
           Align(
             alignment: Alignment.centerRight,

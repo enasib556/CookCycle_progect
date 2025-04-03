@@ -8,7 +8,6 @@ class RecipeModel{
   RecipeModel({ this.cookingTime,required this.name, required this.image,  this.description
   , this.ingredients,  this.steps
   });
-
 }
 
 class IngredientModel{
@@ -16,9 +15,9 @@ class IngredientModel{
   final String quantity;
   final String? image;
   final int? price;
-
   IngredientModel({required this.name, required this.quantity, this.price,this.image,} );
 }
+
 
 class StepModel{
   final String description;

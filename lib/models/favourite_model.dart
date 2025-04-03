@@ -3,6 +3,7 @@ class Favouritemodel {
   final String image;
   final double rating;
   final String description;
+
   Favouritemodel({
     required this.name,
     required this.image,

@@ -57,3 +57,4 @@ class _GradientItemState extends State<GradientItem> {
     );
   }
 }
+

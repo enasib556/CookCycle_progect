@@ -21,3 +21,4 @@ class FavouriteListView extends StatelessWidget {
     );
   }
 }
+

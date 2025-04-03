@@ -6,4 +6,5 @@ class ChatModel{
   ChatModel({required this.message, required this.sender_name
   ,required this.kind, required this.image
   });
+
 }

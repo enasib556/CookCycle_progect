@@ -40,3 +40,4 @@ class DetailsBody extends StatelessWidget {
     );
   }
 }
+

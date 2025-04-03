@@ -20,7 +20,6 @@ class _AuthScreenState extends State<AuthScreen> {
       isLogin = !isLogin;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,10 +72,10 @@ class _AuthScreenState extends State<AuthScreen> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        toggleButton("log in", isLogin, () {
+                        ToggleButton(text: "log in", isActive:isLogin, onPressed: () {
                           if (!isLogin) toggleAuth();
                         }),
-                        toggleButton("sign up", !isLogin, () {
+                        ToggleButton(text: "sign up", isActive:!isLogin,onPressed: () {
                           if (isLogin) toggleAuth();
                         }),
                       ],

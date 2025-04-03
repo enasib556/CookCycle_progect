@@ -31,3 +31,4 @@ class LabelIngredientButton extends StatelessWidget {
     );
   }
 }
+

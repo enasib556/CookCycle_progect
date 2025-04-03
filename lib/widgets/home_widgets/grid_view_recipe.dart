@@ -27,3 +27,4 @@ class GridViewRecipe extends StatelessWidget {
     );
   }
 }
+
