@@ -47,7 +47,7 @@ class _GradientItemState extends State<GradientItem> {
                 widget.quantity,
                 style: TextStyle(
                   fontSize: 16,
-                  color: Color(0xFF5B5D5E).withOpacity(0.6),
+                  color: Color(0xFF5B5D5E).withOpacity(0.8),
                 ),
               ),
             ],

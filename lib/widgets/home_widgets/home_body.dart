@@ -30,7 +30,7 @@ class HomeWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 70),
+              SizedBox(height: 60),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Searchbar(),
@@ -39,7 +39,7 @@ class HomeWidget extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Recipeword(
                   text: 'Recipe Suggestion',
-                  fontSize: 26,
+                  fontSize: 28,
                 ),
               ),
               GridViewRecipe(),
@@ -52,11 +52,11 @@ class HomeWidget extends StatelessWidget {
             child: Text(
               "Find Your\nFavourite Food",
               textAlign: TextAlign.left,
-              style: GoogleFonts.sansita(
-                color: colorTextHome,
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
+              style: TextStyle(
+                fontFamily: 'SansitaOne',
+                color: colorTextHome.withOpacity(0.65),
+                fontSize: 30,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),

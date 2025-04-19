@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:university_graduate_project/models/recipe_model.dart';
 
 import '../../data.dart';
 import '../../utilis/color.dart';
 import '../home_widgets/recipe_word.dart';
 
 class Header extends StatelessWidget {
-  const Header({super.key});
+  final Recipe recipe;
+  const Header({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
-    return  Stack(
+    return Stack(
       children: [
-        Image.asset(recipes[0].image, height: 459, fit: BoxFit.cover),
+        Image.network(recipe.imageUrl!, width: double.infinity, height: 459, fit: BoxFit.cover),
         Positioned(
           top: 50, // Adjust the top position as per your requirement
           left: 10, // Adjust the left position as per your requirement
@@ -21,7 +23,7 @@ class Header extends StatelessWidget {
             child: IconButton(
               icon: Icon(Icons.arrow_back, color: primaryColor),
               onPressed: () {
-                  Navigator.pop(context);
+                Navigator.pop(context);
               },
             ),
           ),
@@ -35,4 +37,3 @@ class Header extends StatelessWidget {
     );
   }
 }
-

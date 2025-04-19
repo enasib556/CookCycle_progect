@@ -6,10 +6,11 @@ import '../../utilis/color.dart';
 class CustomAppbar extends StatelessWidget {
   final String title;
   final bool needDeleteButton;
+  final bool? needSearchButton;
   const CustomAppbar({
     super.key,
     required this.title,
-    required this.needDeleteButton,
+    required this.needDeleteButton,  this.needSearchButton,
   });
 
   @override
@@ -24,7 +25,7 @@ class CustomAppbar extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.arrow_back_ios, color: colorTextHome),
+                    icon: Icon(Icons.arrow_back_ios, color: newColor),
                     onPressed:
                         () => Navigator.pushAndRemoveUntil(
                           context,
@@ -37,17 +38,19 @@ class CustomAppbar extends StatelessWidget {
                   Text(
                     title,
                     textAlign: TextAlign.left,
-                    style: GoogleFonts.sansita(
-                      color: Colors.teal.shade800.withOpacity(0.9),
+                    style: TextStyle(
+                      fontFamily: 'SansitaOne',
+                      color: AuthColorButton,
                       fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
               ),
               Row(
                 children: [
+                  needSearchButton == false
+                      ? Container():
                   Padding(
                     padding: EdgeInsets.only(right: 15),
                     child: CircleAvatar(
@@ -71,6 +74,7 @@ class CustomAppbar extends StatelessWidget {
             ],
           ),
         ),
+        SizedBox(height: 10,),
         const Divider(
           color: Color(0xffA8BBB3),
           thickness: 1,

@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../../utilis/color.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomDropdownField extends StatelessWidget {
   final String label;
-  final String hint;
-  bool isPassword;
-  CustomTextField({
+  final String? selectedValue;
+  final List<String> items;
+  final void Function(String?) onChanged;
+
+  const CustomDropdownField({
     super.key,
     required this.label,
-    required this.hint,
-    this.isPassword = false,
+    required this.selectedValue,
+    required this.items,
+    required this.onChanged,
   });
 
   @override
@@ -22,44 +25,49 @@ class CustomTextField extends StatelessWidget {
           label,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: darkGreen, // اللون الرمادي
+            color: darkGreen,
             fontSize: 16,
           ),
         ),
         SizedBox(height: 5),
-        TextField(
-          obscureText: isPassword,
+        DropdownButtonFormField<String>(
+          value: selectedValue,
           decoration: InputDecoration(
-            hintText: hint,
-            hintStyle: TextStyle(color: Color(0xff6E7370).withOpacity(0.81)),
             filled: true,
             fillColor: Colors.white,
+            hintStyle: TextStyle(color: Color(0xff6E7370).withOpacity(0.81)),
+            hintText: 'Select an option',
             contentPadding: EdgeInsets.symmetric(
               vertical: 14,
               horizontal: 16,
-            ), // تحسين التباعد
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide(color: Color(0xff6E7370)), // اللون الرمادي
+              borderSide: BorderSide(color: Color(0xff6E7370)),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
               borderSide: BorderSide(
                 color: Color(0xffBEC0BF),
-              ), // اللون الرمادي عند عدم التركيز
+              ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
               borderSide: BorderSide(
                 color: Color(0xffA8BBB3),
                 width: 2,
-              ), // اللون الرمادي عند التركيز
+              ),
             ),
-            suffixIcon:
-                isPassword
-                    ? Icon(Icons.visibility_off, color: Color(0xffBEC0BF))
-                    : null,
           ),
+          icon: Icon(Icons.arrow_drop_down, color: Color(0xffBEC0BF)),
+          style: TextStyle(color: Colors.black),
+          items: items
+              .map((gender) => DropdownMenuItem(
+                    value: gender,
+                    child: Text(gender),
+                  ))
+              .toList(),
+          onChanged: onChanged,
         ),
       ],
     );

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../data.dart';
 import '../../models/recipeModel.dart';
 import '../../utilis/color.dart';
 import '../home_widgets/recipe_word.dart';

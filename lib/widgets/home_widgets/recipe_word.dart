@@ -14,12 +14,13 @@ class Recipeword extends StatelessWidget {
           text,
           style: TextStyle(
             fontFamily: 'SansitaOne',
+            fontWeight: FontWeight.w500,
             fontSize: fontSize,
             foreground:
                 Paint()
                   ..style = PaintingStyle.stroke
                   ..strokeWidth =
-                      2 // حجم الاستروك
+                      2.5 // حجم الاستروك
                   ..color = colorTextHome, // لون الحدود الخارجية
           ),
         ),
@@ -27,6 +28,7 @@ class Recipeword extends StatelessWidget {
           text,
           style: TextStyle(
             fontFamily: 'SansitaOne',
+            fontWeight: FontWeight.w500,
             fontSize: fontSize,
             color: Colors.white, // اللون الداخلي
           ),

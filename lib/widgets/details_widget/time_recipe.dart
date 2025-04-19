@@ -13,14 +13,14 @@ class TimeRecipe extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Icon(Icons.access_time_outlined, color: primaryColor, size: 31),
+          Icon(Icons.access_time_outlined, color: AuthColorButton, size: 31),
           const SizedBox(width: 5),
           Text(
             recipes[0].cookingTime!,
             style: TextStyle(
               fontFamily: 'SansitaOne',
               fontSize: 18,
-              color: primaryColor,
+              color: AuthColorButton,
             ),
           ),
         ],

@@ -14,13 +14,15 @@ class DescriptinBox extends StatelessWidget {
         Container(
           width: 317,
           height: 62,
-          decoration: BoxDecoration(border: Border.all(color: primaryColor)),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: primaryColor)),
           child: Center(
             child: Text(
               recipes[0].description!,
               style: TextStyle(
                 fontSize: 22,
-                color: primaryColor,
+                color: Color(0xFF6E7370).withOpacity(0.7),
                 fontWeight: FontWeight.w400,
               ),
             ),

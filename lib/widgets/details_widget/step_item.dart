@@ -15,7 +15,7 @@ class StepItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Container(
-        color: Color(0xFFA8BBB3).withOpacity(0.15),
+        color: Color(0xFFA8BBB3).withOpacity(0.2),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Row(

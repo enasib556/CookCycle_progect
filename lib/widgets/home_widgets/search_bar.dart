@@ -20,13 +20,13 @@ class Searchbar extends StatelessWidget {
           filled: true,
           fillColor: Color(0xffDDE5E5), // خلفية الحقل
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30), // زوايا ناعمة للحقل
+            borderRadius: BorderRadius.circular(27), // زوايا ناعمة للحقل
             borderSide: BorderSide.none, // إزالة الإطار الافتراضي
           ),
           contentPadding:
           EdgeInsets.symmetric(vertical: 14), // تقليل الارتفاع الداخلي
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(27),
             borderSide: BorderSide(
                 color: Colors.green.shade900, width: 2), // حدود عند التركيز
           ),

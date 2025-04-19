@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:university_graduate_project/screens/auth_screen.dart';
-import 'package:university_graduate_project/screens/home_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:university_graduate_project/screens/splash_screen.dart';
 import 'package:university_graduate_project/utilis/color.dart';
-void main()
-{
+
+import 'manager/recipe_cubit/recipe_cubit.dart';
+
+void main() {
   runApp(MyApp());
 }
 
@@ -13,13 +14,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: backgroundColor
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<RecipeCubit>(create: (context) => RecipeCubit()..fetchRecipe()),
+      ],
+      child: MaterialApp(
+        theme: ThemeData.light().copyWith(
+          scaffoldBackgroundColor: backgroundColor,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
       ),
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
     );
   }
 }
-

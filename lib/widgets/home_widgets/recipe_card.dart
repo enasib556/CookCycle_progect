@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:university_graduate_project/screens/details_screen.dart';
-import 'package:university_graduate_project/widgets/home_widgets/recipe_word.dart';
-import '../../models/recipeModel.dart';
+import '../../models/recipe_model.dart';
 import '../../utilis/color.dart';
 
 class RecipeCard extends StatelessWidget {
-  final RecipeModel recipe;
+  final Recipe recipe;
   const RecipeCard({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailsScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailsScreen(recipe: recipe,)));
       },
       child: Container(
         width: 180, // ضبط العرض
@@ -20,8 +19,8 @@ class RecipeCard extends StatelessWidget {
           border: Border.all(
             color: primaryColor,
           ),
-          borderRadius: BorderRadius.circular(25), // زوايا مستديرة
-          color: Colors.white, // خلفية بيضاء
+          borderRadius: BorderRadius.circular(23), // زوايا مستديرة
+          color: beige, // خلفية بيضاء
         ),
         child: Stack(
           children: [
@@ -30,9 +29,9 @@ class RecipeCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min, // منع overflow
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-                  child: Image.asset(
-                    recipe.image,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(23)),
+                  child: Image.network(
+                    recipe.imageUrl??"",
                     fit: BoxFit.cover,
                     height: 120, // تقليل الارتفاع لتناسب التصميم
                     width: double.infinity,
@@ -42,8 +41,14 @@ class RecipeCard extends StatelessWidget {
                   padding:
                   const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
                   child: SizedBox(
-                      width: 150,
-                      child: Recipeword(text: recipe.name, fontSize: 13))
+                      width: 110,
+                      child: Text(
+                        recipe.name??"",
+                        style: TextStyle(
+                          fontFamily: 'SansitaOne',
+                          fontSize: 12.5,
+                          color: Color(0xff666967),
+                        )))
                 ),
                 SizedBox(height: 5),
               ],
@@ -53,7 +58,7 @@ class RecipeCard extends StatelessWidget {
               right: 0,
               bottom: 1,
               child: IconButton(
-                icon: Icon(Icons.favorite_border, color: Colors.grey, size: 26),
+                icon: Icon(Icons.favorite_border, color: colorElevatedButton, size: 26),
                 onPressed: () {},
               ),
             ),

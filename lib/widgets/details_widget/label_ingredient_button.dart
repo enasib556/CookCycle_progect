@@ -16,16 +16,20 @@ class LabelIngredientButton extends StatelessWidget {
           style: TextStyle(
             fontFamily: 'SansitaOne',
             fontSize: 23,
-            color: primaryColor,
+            color: AuthColorButton,
           ),
         ),
         IngredientsList(),
         const SizedBox(height: 10),
-        CustomElevaterdButton(text: 'Add TO Shopping List',icon:Icon(
-          Icons.shopping_cart_outlined,
-          color: Colors.white,
-          size: 30,
-        ),),
+        SizedBox(
+          width: 317,
+          height: 66,
+          child: CustomElevaterdButton(text: 'Add TO Shopping List',onPress: () {},icon:Icon(
+            Icons.shopping_cart_outlined,
+            color: Colors.white,
+            size: 30,
+          ),),
+        ),
         const SizedBox(height: 30),
       ],
     );

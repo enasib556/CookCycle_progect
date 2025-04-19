@@ -1,30 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:university_graduate_project/manager/recipe_cubit/recipe_state.dart';
 import 'package:university_graduate_project/widgets/home_widgets/recipe_card.dart';
-
 import '../../data.dart';
+import '../../manager/recipe_cubit/recipe_cubit.dart';
 
-class GridViewRecipe extends StatelessWidget {
+class GridViewRecipe extends StatefulWidget {
   const GridViewRecipe({super.key});
 
   @override
+  State<GridViewRecipe> createState() => _GridViewRecipeState();
+}
+
+class _GridViewRecipeState extends State<GridViewRecipe> {
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      child: GridView.builder(
-        itemCount: recipesList.length,
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          childAspectRatio: 0.58,
-        ),
-        itemBuilder: (context, index) {
-          return RecipeCard(recipe: recipesList[index]);
-        },
-      ),
+    return BlocBuilder<RecipeCubit, RecipeState>(
+      builder: (context, state) {
+        if (state is RecipeError) {
+          return Center(child: Text(state.errorMessage));
+        } else if (state is RecipeLoaded) {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: GridView.builder(
+              itemCount: state.recipesList.length,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 13,
+                mainAxisSpacing: 20,
+                childAspectRatio: 0.56,
+              ),
+              itemBuilder: (context, index) {
+                return RecipeCard(recipe: state.recipesList[index]);
+              },
+            ),
+          );
+        }
+        else{
+          return Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 }
-
