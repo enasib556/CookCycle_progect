@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../utilis/assets.dart';
 
 class AnimationIcon extends StatefulWidget {
@@ -13,17 +12,32 @@ class _AnimationIconState extends State<AnimationIcon>
     with TickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<Offset> animation;
+
   @override
   void initState() {
+    super.initState();
+
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 3),
+      duration: Duration(seconds: 4),
     );
-    animation = Tween(
+
+    animation = Tween<Offset>(
       begin: Offset(-5, 0),
       end: Offset.zero,
-    ).animate(animationController);
+    ).animate(CurvedAnimation(
+      parent: animationController,
+      curve: Curves.easeOut,
+    ));
+
     animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    animationController.stop();
+    animationController.dispose();
+    super.dispose();
   }
 
   @override

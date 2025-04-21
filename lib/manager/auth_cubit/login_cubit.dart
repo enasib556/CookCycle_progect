@@ -44,15 +44,15 @@ class LoginCubit extends Cubit<LoginState> {
       if (response.statusCode == 200 && responseBody["success"] == true) {
         final token = responseBody["token"];
         final user = responseBody["user"];
+        print("Token: $token");
 
-        // خزّن التوكن في SharedPreferences
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString("token", token);
         await prefs.setInt("userId", user["CustomerId"]);
         await prefs.setString("username", user["Username"]);
         await prefs.setString("email", user["Email"]);
 
-        emit(LoginSuccessState());
+        emit(LoginSuccessState(token: token)); // ✅ تم التعديل هنا
       } else {
         final errorMsg = _parseError(responseBody);
         emit(LoginFailedState(errorMessage: errorMsg));

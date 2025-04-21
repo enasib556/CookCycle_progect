@@ -4,6 +4,7 @@ import 'package:university_graduate_project/manager/auth_cubit/login_cubit.dart'
 import 'package:university_graduate_project/manager/auth_cubit/login_state.dart';
 import 'package:university_graduate_project/screens/home_screen.dart';
 import 'package:university_graduate_project/utilis/color.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // إضافة الحزمة
 import '../utilis/assets.dart';
 import '../widgets/auths_widgets/custom_button.dart';
 import '../widgets/auths_widgets/custom_text_field.dart';
@@ -24,8 +25,12 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is LoginSuccessState) {
+          // حفظ التوكن في SharedPreferences
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString('token', state.token); // تخزين التوكن
+
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => HomeScreen()),
