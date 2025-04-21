@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
-import 'package:university_graduate_project/manager/auth_cubit/auth_state.dart';
+import 'package:university_graduate_project/manager/auth_cubit/register_state.dart';
 
-class AuthCubit extends Cubit<AuthStates> {
-  AuthCubit() : super(AuthInitialState());
+class RegisterCubit extends Cubit<RegisterStates> {
+  RegisterCubit() : super(AuthInitialState());
 
   String _parseError(dynamic body) {
     if (body is Map) {

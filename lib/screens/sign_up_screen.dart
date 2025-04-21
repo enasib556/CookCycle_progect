@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:university_graduate_project/manager/auth_cubit/auth_cubit.dart';
+import 'package:university_graduate_project/manager/auth_cubit/register_cubit.dart';
 import 'package:university_graduate_project/screens/home_screen.dart';
 import 'package:university_graduate_project/utilis/color.dart';
-import '../manager/auth_cubit/auth_state.dart';
+import '../manager/auth_cubit/register_state.dart';
 import '../utilis/assets.dart';
 import '../widgets/auths_widgets/custom_button.dart';
 import '../widgets/auths_widgets/custom_dropdown_field.dart';
@@ -28,7 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthStates>(
+    return BlocConsumer<RegisterCubit, RegisterStates>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {
           Navigator.pushReplacement(
@@ -166,7 +166,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   },
                                 ),
                                 const SizedBox(height: 15),
-                                customButton(
+                                CustomButton(
                                   text: 'Sign up',
                                   onTap: () {
                                     if (formKey.currentState!.validate()) {
@@ -179,7 +179,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       print("Confirm Password: '${confirmPassController.text}'");
                                       print("=================");
 
-                                      BlocProvider.of<AuthCubit>(context).register(
+                                      BlocProvider.of<RegisterCubit>(context).register(
                                         userName: fullNameController.text.trim(),
                                         email: emailController.text.trim(),
                                         password: passwordController.text,
