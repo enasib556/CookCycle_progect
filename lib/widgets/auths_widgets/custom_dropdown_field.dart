@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../utilis/color.dart';
 
 class CustomDropdownField extends StatelessWidget {
@@ -7,6 +6,7 @@ class CustomDropdownField extends StatelessWidget {
   final String? selectedValue;
   final List<String> items;
   final void Function(String?) onChanged;
+  final String? Function(String?)? validator;
 
   const CustomDropdownField({
     super.key,
@@ -14,6 +14,7 @@ class CustomDropdownField extends StatelessWidget {
     required this.selectedValue,
     required this.items,
     required this.onChanged,
+    this.validator,
   });
 
   @override
@@ -29,43 +30,44 @@ class CustomDropdownField extends StatelessWidget {
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         DropdownButtonFormField<String>(
           value: selectedValue,
+          validator: validator,
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white,
-            hintStyle: TextStyle(color: Color(0xff6E7370).withOpacity(0.81)),
+            hintStyle: TextStyle(color: const Color(0xff6E7370).withOpacity(0.81)),
             hintText: 'Select an option',
-            contentPadding: EdgeInsets.symmetric(
+            contentPadding: const EdgeInsets.symmetric(
               vertical: 14,
               horizontal: 16,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide(color: Color(0xff6E7370)),
+              borderSide: const BorderSide(color: Color(0xff6E7370)),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Color(0xffBEC0BF),
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Color(0xffA8BBB3),
                 width: 2,
               ),
             ),
           ),
-          icon: Icon(Icons.arrow_drop_down, color: Color(0xffBEC0BF)),
-          style: TextStyle(color: Colors.black),
+          icon: const Icon(Icons.arrow_drop_down, color: Color(0xffBEC0BF)),
+          style: const TextStyle(color: Colors.black),
           items: items
               .map((gender) => DropdownMenuItem(
-                    value: gender,
-                    child: Text(gender),
-                  ))
+            value: gender,
+            child: Text(gender),
+          ))
               .toList(),
           onChanged: onChanged,
         ),

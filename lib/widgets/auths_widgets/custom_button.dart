@@ -4,17 +4,13 @@ import 'package:university_graduate_project/screens/home_screen.dart';
 import '../../utilis/color.dart';
 
 class customButton extends StatelessWidget {
-  const customButton({super.key, required this.text});
+  const customButton({super.key, required this.text, this.onTap});
   final String text;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
-        );
-      },
+      onTap:onTap,
       child: Container(
         width: 180,
         height: 50,

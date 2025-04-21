@@ -13,8 +13,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  final emailController=TextEditingController();
+  final passwordController=TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SafeArea(
@@ -51,13 +56,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           CustomTextField(
                             label: "Email",
-                            hint: "enter your email...",
+                            hint: "enter your email...", controller: emailController,
                           ),
                           SizedBox(height: 26),
                           CustomTextField(
                             label: "Password",
                             hint: "enter your password...",
-                            isPassword: true,
+                            isPassword: true, controller: passwordController,
                           ),
                           SizedBox(height: 30),
                           customButton(text: 'Log in'),
