@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../data.dart';
+import '../../models/recipe_model.dart';
 import '../../utilis/color.dart';
 
 class TimeRecipe extends StatelessWidget {
-  const TimeRecipe({super.key});
+  final Recipe recipe;
+  const TimeRecipe({super.key,required this.recipe});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class TimeRecipe extends StatelessWidget {
           Icon(Icons.access_time_outlined, color: AuthColorButton, size: 31),
           const SizedBox(width: 5),
           Text(
-            recipes[0].cookingTime!,
+            '${recipe.duration} ',
             style: TextStyle(
               fontFamily: 'SansitaOne',
               fontSize: 18,

@@ -106,7 +106,7 @@ class _CustomChatState extends State<CustomChat> {
 
     try {
       final response = await http.post(
-        Uri.parse("http://192.168.1.6:8000/chat/"),
+        Uri.parse("http://172.16.16.9:5000/chat/"),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({"user_input": userMessage}),
       );

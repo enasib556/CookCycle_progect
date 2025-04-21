@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../data.dart';
+import 'package:university_graduate_project/models/recipe_model.dart';
 
 class StepItem extends StatelessWidget {
+  final Steps step;
   final int index;
-
-  const StepItem({super.key, required this.index});
+  final int totalSteps;
+  const StepItem({super.key, required this.index, required this.step, required this.totalSteps});
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +20,16 @@ class StepItem extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            textDirection: isOdd ? TextDirection.rtl : TextDirection.ltr, // تبديل الاتجاه
+            textDirection:
+            isOdd ? TextDirection.rtl : TextDirection.ltr, // تبديل الاتجاه
             children: [
-              Image.asset(
-                recipes[0].steps![index].image,
-                width: 130,
-                height: 130,
+              ClipOval(
+                child: Image.network(
+                  step.imageUrl!,
+                  width: 120,
+                  height: 120,
+                  fit: BoxFit.cover,
+                ),
               ),
               const SizedBox(width: 15),
               Column(
@@ -36,7 +40,7 @@ class StepItem extends StatelessWidget {
                       SvgPicture.asset('assets/icons/chef.svg'),
                       const SizedBox(width: 10),
                       Text(
-                        'Step ${recipes[0].steps![index].stepNumber}/5',
+                        'Step ${step.stepNumber}/$totalSteps',
                         style: TextStyle(
                           fontFamily: 'SansitaOne',
                           fontSize: 17,
@@ -49,7 +53,7 @@ class StepItem extends StatelessWidget {
                   SizedBox(
                     width: 155,
                     child: Text(
-                      recipes[0].steps![index].description,
+                      step.instructions!,
                       style: TextStyle(
                         fontSize: 17,
                         color: Colors.black.withOpacity(0.5),

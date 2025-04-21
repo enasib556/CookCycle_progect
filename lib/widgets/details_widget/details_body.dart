@@ -17,8 +17,9 @@ class DetailsBody extends StatelessWidget {
       child: Column(
         children: [
           Header(recipe: recipe,),
-          TimeRecipe(),
-          DescriptinBox(),
+          SizedBox(height: 10,),
+          TimeRecipe(recipe: recipe,),
+          DescriptinBox(recipe: recipe,),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
@@ -33,7 +34,7 @@ class DetailsBody extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                StepsList()
+                StepsList(recipe: recipe,)
               ],
             ),
           ),
