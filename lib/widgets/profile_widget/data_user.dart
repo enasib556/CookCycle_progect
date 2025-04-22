@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-
 import '../../utilis/color.dart';
 
 class DataUser extends StatelessWidget {
   final String title;
-  final String Value;
+  final String value;
   final IconData icon;
-  const DataUser({super.key, required this.title, required this.Value, required this.icon});
+
+  const DataUser({super.key, required this.title, required this.value, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class DataUser extends StatelessWidget {
                 ),
               ),
               Text(
-                Value,
+                value,
                 style: TextStyle(fontFamily: 'SansitaOne', fontSize: 16),
               ),
             ],

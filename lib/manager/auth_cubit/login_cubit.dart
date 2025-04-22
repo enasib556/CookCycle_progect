@@ -1,27 +1,16 @@
 import 'dart:convert';
-import 'package:bloc/bloc.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
-import 'package:university_graduate_project/manager/auth_cubit/login_state.dart';
 
-
-import '../../models/authModels/auth_model.dart'; // تعديل لاستيراد AuthResponse
+import '../../models/authModels/auth_model.dart';
+import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitialState());
 
-  String _parseError(dynamic body) {
-    if (body is Map && body.containsKey("message")) {
-      return body["message"];
-    }
-    return "An unknown error occurred.";
-  }
-
-  Future<void> login({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> login({required String email, required String password}) async {
     if (email.isEmpty || password.isEmpty) {
       emit(LoginFailedState(errorMessage: "Both fields must be filled out"));
       return;
@@ -44,19 +33,21 @@ class LoginCubit extends Cubit<LoginState> {
       final responseBody = jsonDecode(response.body);
 
       if (response.statusCode == 200 && responseBody["success"] == true) {
-        // تعديل لاستخدام AuthResponse
         final authResponse = AuthResponse.fromJson(responseBody);
 
         // تخزين البيانات في SharedPreferences
         final prefs = await SharedPreferences.getInstance();
-        await prefs.setString("token", authResponse.token ?? ''); // إضافة القيمة الافتراضية إذا كانت null
+        await prefs.setString("token", authResponse.token ?? '');
         await prefs.setInt("userId", authResponse.user?.customerId ?? 0);
         await prefs.setString("username", authResponse.user?.username ?? '');
         await prefs.setString("email", authResponse.user?.email ?? '');
+        await prefs.setString("gender", authResponse.user?.gender ?? '');
+        await prefs.setString("phone", authResponse.user?.phone ?? '');
+
 
         emit(LoginSuccessState(authResponse: authResponse));
       } else {
-        emit(LoginFailedState(errorMessage: _parseError(responseBody)));
+        emit(LoginFailedState(errorMessage: responseBody['message'] ?? 'Login failed.'));
       }
     } catch (e) {
       emit(LoginFailedState(errorMessage: "An error occurred: ${e.toString()}"));

@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/authModels/auth_model.dart';
-
 import 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterStates> {
@@ -59,7 +59,16 @@ class RegisterCubit extends Cubit<RegisterStates> {
       if (response.statusCode == 200 && responseBody["success"] == true) {
         final authResponse = AuthResponse.fromJson(responseBody);
 
-        // Optional: print data or store it
+        // تخزين البيانات في SharedPreferences بعد التسجيل
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString("token", authResponse.token ?? '');
+        await prefs.setInt("userId", authResponse.user?.customerId ?? 0);
+        await prefs.setString("username", authResponse.user?.username ?? '');
+        await prefs.setString("email", authResponse.user?.email ?? '');
+        await prefs.setString("gender", authResponse.user?.gender ?? '');
+
+        // يمكن إضافة بيانات أخرى مثل رقم الهاتف هنا إذا أردت
+
         print("✅ Token: ${authResponse.token}");
         print("👤 User: ${authResponse.user?.username}");
 
