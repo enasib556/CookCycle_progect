@@ -5,10 +5,12 @@ import 'package:university_graduate_project/manager/auth_cubit/login_state.dart'
 import 'package:university_graduate_project/screens/home_screen.dart';
 import 'package:university_graduate_project/utilis/color.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // إضافة الحزمة
+import '../models/authModels/auth_model.dart';
 import '../utilis/assets.dart';
 import '../widgets/auths_widgets/custom_button.dart';
 import '../widgets/auths_widgets/custom_text_field.dart';
 import 'sign_up_screen.dart';
+ // استيراد الـ AuthResponse
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -27,14 +29,30 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) async {
         if (state is LoginSuccessState) {
-          // حفظ التوكن في SharedPreferences
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          prefs.setString('token', state.token); // تخزين التوكن
+          // استجابة الـ Login
+          AuthResponse authResponse = state.authResponse; // الحصول على استجابة التوثيق
+          if (authResponse.success) {
+            // حفظ التوكن في SharedPreferences
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setString('token', authResponse.token ?? ''); // تخزين التوكن
 
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-          );
+            // الانتقال إلى الشاشة الرئيسية
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+            );
+          } else {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                content: Text(
+                  authResponse.message,
+                  style: const TextStyle(color: Colors.white),
+                ),
+                backgroundColor: lightOrange,
+              ),
+            );
+          }
         } else if (state is LoginFailedState) {
           showDialog(
             context: context,

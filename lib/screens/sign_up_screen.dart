@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:university_graduate_project/manager/auth_cubit/register_cubit.dart';
 import 'package:university_graduate_project/screens/home_screen.dart';
+import 'package:university_graduate_project/screens/login_screen.dart';
 import 'package:university_graduate_project/utilis/color.dart';
 import '../manager/auth_cubit/register_state.dart';
 import '../utilis/assets.dart';
@@ -32,17 +33,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
       listener: (context, state) {
         if (state is RegisterSuccessState) {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomeScreen()));
+              context, MaterialPageRoute(builder: (context) =>  LoginScreen()));
         } else if (state is FailedToRegisterState) {
           showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                content: Text(
-                  state.errorMessage,
-                  style: const TextStyle(color: Colors.white),
-                ),
-                backgroundColor: lightOrange,
-              ));
+            context: context,
+            builder: (context) => AlertDialog(
+              content: Text(
+                state.errorMessage,
+                style: const TextStyle(color: Colors.white),
+              ),
+              backgroundColor: lightOrange,
+            ),
+          );
         }
       },
       builder: (context, state) {
@@ -60,8 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   child: SingleChildScrollView(
                     child: ConstrainedBox(
-                      constraints:
-                      BoxConstraints(minHeight: constraints.maxHeight),
+                      constraints: BoxConstraints(minHeight: constraints.maxHeight),
                       child: IntrinsicHeight(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -103,7 +104,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     if (value?.isEmpty ?? true) {
                                       return "Email is required";
                                     }
-                                    // يمكن إضافة تحقق من صحة البريد الإلكتروني هنا
                                     return null;
                                   },
                                 ),
@@ -170,15 +170,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   text: 'Sign up',
                                   onTap: () {
                                     if (formKey.currentState!.validate()) {
-                                      print("=== Form Data ===");
-                                      print("Full Name: '${fullNameController.text}'");
-                                      print("Email: '${emailController.text}'");
-                                      print("Phone: '${phoneController.text}'");
-                                      print("Gender: '$selectedGender'");
-                                      print("Password: '${passwordController.text}'");
-                                      print("Confirm Password: '${confirmPassController.text}'");
-                                      print("=================");
-
                                       BlocProvider.of<RegisterCubit>(context).register(
                                         userName: fullNameController.text.trim(),
                                         email: emailController.text.trim(),

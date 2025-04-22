@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
-import 'package:university_graduate_project/manager/auth_cubit/register_state.dart';
+import '../../models/authModels/auth_model.dart';
+
+import 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit() : super(AuthInitialState());
@@ -40,7 +42,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
       final response = await http.post(
         Uri.parse("http://172.16.16.9:3000/api/users/register"),
         headers: {
-          "Content-Type": "application/json", // مهم جدًا
+          "Content-Type": "application/json",
         },
         body: jsonEncode({
           "username": userName.trim(),
@@ -48,13 +50,19 @@ class RegisterCubit extends Cubit<RegisterStates> {
           "password": password,
           "confirmPass": confirmPass,
           "phone": phone.trim(),
-          "gender": gender.toLowerCase(), // تأكد من إنها lowercase لو الباك اند بيتوقعها كده
+          "gender": gender.toLowerCase(),
         }),
       );
 
       final responseBody = jsonDecode(response.body);
 
       if (response.statusCode == 200 && responseBody["success"] == true) {
+        final authResponse = AuthResponse.fromJson(responseBody);
+
+        // Optional: print data or store it
+        print("✅ Token: ${authResponse.token}");
+        print("👤 User: ${authResponse.user?.username}");
+
         emit(RegisterSuccessState());
       } else {
         final errorMsg = _parseError(responseBody);
