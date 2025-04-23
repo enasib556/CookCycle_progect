@@ -75,19 +75,19 @@ final List<RecipeModel> recipesList = [
       image: "assets/images/test.jpg"),
 ];
 
-final List<Favouritemodel> favouriteRecipes = [
-  Favouritemodel(
-    name: "Roasted Sweet Potato Salad",
-    image: "assets/images/test.jpg",
-    rating: 4.5,
-    description:
-    "Delicious roasted sweet potatoes with nuts and Healthy toast with avocado, salmon, and eggs ",
-  ),
-  Favouritemodel(
-    name: "Avocado Toast & Salmon",
-    image: "assets/images/test.jpg",
-    rating: 5.0,
-    description:
-    "Healthy toast with avocado, salmon, and eggs Healthy toast with avocado, salmon, and eggs.",
-  ),
-];
+// final List<Favouritemodel> favouriteRecipes = [
+//   Favouritemodel(
+//     name: "Roasted Sweet Potato Salad",
+//     image: "assets/images/test.jpg",
+//     rating: 4.5,
+//     description:
+//     "Delicious roasted sweet potatoes with nuts and Healthy toast with avocado, salmon, and eggs ",
+//   ),
+//   Favouritemodel(
+//     name: "Avocado Toast & Salmon",
+//     image: "assets/images/test.jpg",
+//     rating: 5.0,
+//     description:
+//     "Healthy toast with avocado, salmon, and eggs Healthy toast with avocado, salmon, and eggs.",
+//   ),
+// ];

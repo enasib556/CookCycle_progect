@@ -24,7 +24,7 @@ class DetailsBody extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               children: [
-                LabelIngredientButton(),
+                LabelIngredientButton(recipe: recipe,),
                 Text(
                   'Steps to Prepare Classic Caesar Chicken',
                   style: TextStyle(

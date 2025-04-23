@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
-
 import '../../models/authModels/auth_model.dart';
 import 'login_state.dart';
 

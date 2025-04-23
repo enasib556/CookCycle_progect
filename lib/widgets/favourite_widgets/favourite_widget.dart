@@ -12,7 +12,8 @@ class FavouriteWidget extends StatelessWidget {
       children: [
         CustomAppbar(
           title: 'Favourites',
-          needDeleteButton: true,
+          needDeleteButton: false,
+          needSearchButton: false,
         ),
         FavouriteListView()
       ],

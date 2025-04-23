@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../models/recipe_model.dart';
 import '../../utilis/color.dart';
 import 'custom_elevaterd_button.dart';
 import 'ingredients_list.dart';
 
 class LabelIngredientButton extends StatelessWidget {
-  const LabelIngredientButton({super.key});
+  final Recipe recipe;
+  const LabelIngredientButton({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class LabelIngredientButton extends StatelessWidget {
             color: AuthColorButton,
           ),
         ),
-        IngredientsList(),
+        IngredientsList(recipe: recipe),
         const SizedBox(height: 10),
         SizedBox(
           width: 317,

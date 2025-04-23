@@ -41,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
     String? token = prefs.getString('token'); // استرجاع التوكن من SharedPreferences
 
     if (token == null) {
-      // إذا لم يكن هناك توكن، نعيد التوجيه إلى شاشة تسجيل الدخول
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => LoginScreen()),

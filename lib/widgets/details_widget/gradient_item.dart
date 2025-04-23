@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:university_graduate_project/models/recipe_model.dart';
 
 class GradientItem extends StatefulWidget {
-  final String name;
-  final String quantity;
+  final Ingredients ingredients;
 
-  const GradientItem({super.key, required this.name, required this.quantity});
+  const GradientItem({super.key, required this.ingredients});
 
   @override
   State<GradientItem> createState() => _GradientItemState();
@@ -36,7 +36,7 @@ class _GradientItemState extends State<GradientItem> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.name,
+                widget.ingredients.name!,
                 style: TextStyle(
                   fontSize: 17,
                   color: Color(0xFF2A2C2C),
@@ -44,7 +44,7 @@ class _GradientItemState extends State<GradientItem> {
                 ),
               ),
               Text(
-                widget.quantity,
+                widget.ingredients.quantity!,
                 style: TextStyle(
                   fontSize: 16,
                   color: Color(0xFF5B5D5E).withOpacity(0.8),

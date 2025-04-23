@@ -1,17 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:university_graduate_project/screens/details_screen.dart';
 import '../../models/recipe_model.dart';
+import '../../network/favourite_service.dart';
 import '../../utilis/color.dart';
 
-class RecipeCard extends StatelessWidget {
+class RecipeCard extends StatefulWidget {
   final Recipe recipe;
   const RecipeCard({super.key, required this.recipe});
+
+  @override
+  State<RecipeCard> createState() => _RecipeCardState();
+}
+
+class _RecipeCardState extends State<RecipeCard> {
+  bool isFavorite =false;
+  @override
+  void initState() {
+    super.initState();
+    _loadFavouriteStatus();
+  }
+
+  void _loadFavouriteStatus() async {
+    bool fav = await FavouriteService.isFavourite(widget.recipe);
+    setState(() {
+      isFavorite = fav;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailsScreen(recipe: recipe,)));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailsScreen(recipe: widget.recipe,)));
       },
       child: Container(
         width: 180, // ضبط العرض
@@ -31,7 +51,7 @@ class RecipeCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(23)),
                   child: Image.network(
-                    recipe.imageUrl??"",
+                    widget.recipe.imageUrl??"",
                     fit: BoxFit.cover,
                     height: 120, // تقليل الارتفاع لتناسب التصميم
                     width: double.infinity,
@@ -43,7 +63,7 @@ class RecipeCard extends StatelessWidget {
                   child: SizedBox(
                       width: 110,
                       child: Text(
-                        recipe.name??"",
+                        widget.recipe.name??"",
                         style: TextStyle(
                           fontFamily: 'SansitaOne',
                           fontSize: 12.5,
@@ -58,8 +78,14 @@ class RecipeCard extends StatelessWidget {
               right: 0,
               bottom: 1,
               child: IconButton(
-                icon: Icon(Icons.favorite_border, color: colorElevatedButton, size: 26),
-                onPressed: () {},
+                icon: Icon(isFavorite?Icons.favorite:Icons.favorite_border, color: colorElevatedButton, size: 26),
+                onPressed: () async {
+                  await FavouriteService.toggleFavourite(widget.recipe);
+                  bool fav = await FavouriteService.isFavourite(widget.recipe);
+                  setState(() {
+                    isFavorite = fav;
+                  });
+                },
               ),
             ),
           ],
