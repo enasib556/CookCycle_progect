@@ -27,39 +27,19 @@ class _IngredientsListState extends State<IngredientsList> {
   void initState() {
     super.initState();
     ingredients = widget.recipe.ingredients ?? [];
-
-    // تأكيد أن الأطوال متطابقة لتفادي المشاكل
     assert(
     ingredients.length == widget.selectedIngredients.length,
     '❌ ingredients.length لا يساوي selectedIngredients.length',
     );
   }
 
-  // حفظ المكونات المحددة في SharedPreferences
-  void saveSelectedIngredients() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<Ingredients> selected = ingredients.where((i) => i.isSelected).toList();
-    List<String> selectedJsonList = selected.map((i) => jsonEncode(i.toJson())).toList();
-    await prefs.setStringList('selected_ingredients', selectedJsonList);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Ingredients saved successfully!')),
-    );
-  }
-
-  // تبديل اختيار المكون
   void toggleSelection(int index) {
     setState(() {
       ingredients[index].isSelected = !ingredients[index].isSelected;
       widget.onSelectionChanged(index, ingredients[index].isSelected);
 
-      // تحقق من أن index داخل النطاق
       if (index < widget.selectedIngredients.length) {
         widget.selectedIngredients[index] = ingredients[index].isSelected;
-      } else {
-        debugPrint(
-          "⚠️ index $index خارج حدود selectedIngredients (${widget.selectedIngredients.length})",
-        );
       }
     });
   }

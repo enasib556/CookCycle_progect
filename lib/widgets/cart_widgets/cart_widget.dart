@@ -14,20 +14,23 @@ class CartWidget extends StatelessWidget {
         child: Column(
           children: [
             CustomAppbar(title: 'Shopping list', needDeleteButton: false),
-            SizedBox(height: 20,),
-            CatListView(),
-            SizedBox(height: 23,),
-            SubtotalContainer(),
-            SizedBox(height: 23,),
+            const SizedBox(height: 20),
+            const CatListView(),
+            const SizedBox(height: 23),
+            const SubtotalContainer(),
+            const SizedBox(height: 23),
             SizedBox(
-                width: 248,
-                height: 60,
-                child: CustomElevatedButton(text: 'Place Order',onPress: () {},)),
-            SizedBox(height: 23,),
+              width: 248,
+              height: 60,
+              child: CustomElevatedButton(
+                text: 'Place Order',
+                onPress: () {},
+              ),
+            ),
+            const SizedBox(height: 23),
           ],
         ),
       ),
     );
   }
 }
-

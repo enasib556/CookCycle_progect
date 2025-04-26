@@ -1,64 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../models/recipeModel.dart';
-import '../../utilis/color.dart';
-import '../home_widgets/recipe_word.dart';
-import 'custom_container.dart';
+
+import '../../models/recipe_model.dart';
 
 class NamePriceColumn extends StatelessWidget {
-  final IngredientModel recipe ;
-  double sumPrice = 0;
-   NamePriceColumn({super.key, required this.recipe});
+  final Ingredients ingredient;
+
+  const NamePriceColumn({super.key, required this.ingredient});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 150,
-            child: Recipeword(
-              text: recipe.name,
-              fontSize: 17,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          ingredient.name ?? '',
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
           ),
-          SizedBox(height: 5),
-          Text(
-            'Price: \$${recipe.price}',
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.black.withOpacity(0.36),
-              fontWeight: FontWeight.w400,
-            ),
+        ),
+        Text(
+          ingredient.quantity ?? '',
+          style: const TextStyle(
+            fontSize: 14,
+            color: Colors.grey,
           ),
-          Spacer(),
-          Row(
-            children: [
-              CustomContainer(
-                width: 35,
-                height: 35,
-                child: Icon(
-                  Icons.favorite,
-                  size: 24,
-                  color: colorIconCart,
-                ),
-              ),
-              SizedBox(width: 20),
-              CustomContainer(
-                width: 35,
-                height: 35,
-                child: SvgPicture.asset(
-                  'assets/icons/delete.svg',
-                  fit: BoxFit.scaleDown,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
-

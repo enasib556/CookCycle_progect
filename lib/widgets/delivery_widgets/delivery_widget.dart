@@ -12,18 +12,14 @@ class DeliveryWidget extends StatefulWidget {
 class _DeliveryWidgetState extends State<DeliveryWidget> {
   bool showCart = false;
 
-void toggleCart() {
-  print("Button Pressed: Showing CartWidget");
-  setState(() {
-    showCart = true;
-  });
-}
-
+  void toggleCart() {
+    setState(() {
+      showCart = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return showCart
-        ? const CartWidget()
-        : BodyDesign(onOrderPressed: toggleCart);
+    return showCart ? const CartWidget() : BodyDesign(onOrderPressed: toggleCart);
   }
 }

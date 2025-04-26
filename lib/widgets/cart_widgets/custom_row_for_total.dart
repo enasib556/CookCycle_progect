@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../utilis/color.dart';
 
 class CustomRowForTotal extends StatelessWidget {
   final String text;
   final double price;
+
   const CustomRowForTotal({super.key, required this.text, required this.price});
 
   @override
@@ -13,7 +13,7 @@ class CustomRowForTotal extends StatelessWidget {
     return Row(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 16.0),
+          padding: const EdgeInsets.only(left: 16.0),
           child: Text(
             text,
             style: GoogleFonts.sansita(
@@ -39,4 +39,3 @@ class CustomRowForTotal extends StatelessWidget {
     );
   }
 }
-

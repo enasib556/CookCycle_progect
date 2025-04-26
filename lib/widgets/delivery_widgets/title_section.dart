@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../utilis/color.dart';
 
 class TitleSection extends StatelessWidget {
@@ -19,12 +18,15 @@ class TitleSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
-         Text(
+        const Text(
           'Now you can order all your favourite\n'
-          'ingredients or recipes straight to your\n'
-          'doorstep 🏠🛒.',
+              'ingredients or recipes straight to your\n'
+              'doorstep 🏠🛒.',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18, color: AuthColorButton),
+          style: TextStyle(
+            fontSize: 18,
+            color: Color(0xff6E7370),
+          ),
         ),
       ],
     );

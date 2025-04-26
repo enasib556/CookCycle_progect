@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../utilis/color.dart';
 
 class CustomContainer extends StatelessWidget {
@@ -7,7 +6,14 @@ class CustomContainer extends StatelessWidget {
   final double height;
   final Widget child;
   final Color? color;
-  const CustomContainer({super.key, required this.width, required this.height, required this.child,  this.color});
+
+  const CustomContainer({
+    super.key,
+    required this.width,
+    required this.height,
+    required this.child,
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +21,10 @@ class CustomContainer extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: color==null?colorCard:color,
+        color: color ?? colorCard,
         borderRadius: BorderRadius.circular(10),
       ),
       child: child,
     );
   }
 }
-

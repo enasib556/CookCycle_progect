@@ -133,4 +133,3 @@ class Ingredients {
     return data;
   }
 }
-

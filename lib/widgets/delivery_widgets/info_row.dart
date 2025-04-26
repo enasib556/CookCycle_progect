@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../../utilis/color.dart';
+
 class InfoRow extends StatelessWidget {
   final IconData icon;
   final String title;
@@ -18,7 +18,7 @@ class InfoRow extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, color: AuthColorButton, size:22),
+        Icon(icon, color: AuthColorButton, size: 22),
         const SizedBox(width: 10),
         Expanded(
           child: RichText(
