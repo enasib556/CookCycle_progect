@@ -22,7 +22,7 @@ class CartWidget extends StatelessWidget {
             SizedBox(
                 width: 248,
                 height: 60,
-                child: CustomElevaterdButton(text: 'Place Order',onPress: () {},)),
+                child: CustomElevatedButton(text: 'Place Order',onPress: () {},)),
             SizedBox(height: 23,),
           ],
         ),

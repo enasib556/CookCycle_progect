@@ -48,7 +48,7 @@ class BodyDesign extends StatelessWidget {
             SizedBox(
               width: 282,
               height: 60,
-              child: CustomElevaterdButton(
+              child: CustomElevatedButton(
                 text: 'Start Ordering',
                 onPress: onOrderPressed,
               ),

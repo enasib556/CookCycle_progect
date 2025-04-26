@@ -35,4 +35,3 @@ class DescriptinBox extends StatelessWidget {
     );
   }
 }
-

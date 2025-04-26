@@ -32,35 +32,36 @@ class StepItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 15),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      SvgPicture.asset('assets/icons/chef.svg'),
-                      const SizedBox(width: 10),
-                      Text(
-                        'Step ${step.stepNumber}/$totalSteps',
-                        style: TextStyle(
-                          fontFamily: 'SansitaOne',
-                          fontSize: 17,
-                          color: Color(0xFFA8BBB3),
+              Expanded( // استخدام Expanded لضمان توزيع المساحة بشكل مناسب
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start, // تعديل لمحاذاة النص
+                  children: [
+                    Row(
+                      children: [
+                        SvgPicture.asset('assets/icons/chef.svg'),
+                        const SizedBox(width: 10),
+                        Text(
+                          'Step ${step.stepNumber}/$totalSteps',
+                          style: TextStyle(
+                            fontFamily: 'SansitaOne',
+                            fontSize: 17,
+                            color: Color(0xFFA8BBB3),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: 155,
-                    child: Text(
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
                       step.instructions!,
                       style: TextStyle(
                         fontSize: 17,
                         color: Colors.black.withOpacity(0.5),
                       ),
+                      maxLines: 2, // الحد من عدد الأسطر لتجنب overflow
+                      overflow: TextOverflow.ellipsis, // إضافة التمرير النصي
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

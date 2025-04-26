@@ -1,17 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:university_graduate_project/models/recipe_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../models/recipe_model.dart';
 
 class GradientItem extends StatefulWidget {
   final Ingredients ingredients;
+  final Function(int, bool) onSelectionChanged;
 
-  const GradientItem({super.key, required this.ingredients});
+  const GradientItem({
+    super.key,
+    required this.ingredients,
+    required this.onSelectionChanged,
+  });
 
   @override
   State<GradientItem> createState() => _GradientItemState();
 }
 
 class _GradientItemState extends State<GradientItem> {
-  bool isSelected = false;  // Move the state variable outside build method
+  bool isSelected = false; // ✅ تم تهيئته مباشرة
+
+  @override
+  void initState() {
+    super.initState();
+    loadSelectionState();
+  }
+
+  void loadSelectionState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool savedState = prefs.getBool('ingredient_${widget.ingredients.ingredientId}') ?? widget.ingredients.isSelected;
+    setState(() {
+      isSelected = savedState;
+    });
+  }
+
+  void saveSelectionState(bool isSelected) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('ingredient_${widget.ingredients.ingredientId}', isSelected);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +48,10 @@ class _GradientItemState extends State<GradientItem> {
           InkWell(
             onTap: () {
               setState(() {
-                isSelected = !isSelected;  // Toggle selection state
+                isSelected = !isSelected;
+                widget.ingredients.isSelected = isSelected;
+                saveSelectionState(isSelected);
+                widget.onSelectionChanged(widget.ingredients.ingredientId!, isSelected);
               });
             },
             child: Icon(
@@ -36,18 +65,18 @@ class _GradientItemState extends State<GradientItem> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.ingredients.name!,
-                style: TextStyle(
+                widget.ingredients.name ?? '',
+                style: const TextStyle(
                   fontSize: 17,
                   color: Color(0xFF2A2C2C),
                   fontWeight: FontWeight.w400,
                 ),
               ),
               Text(
-                widget.ingredients.quantity!,
+                widget.ingredients.quantity ?? '',
                 style: TextStyle(
                   fontSize: 16,
-                  color: Color(0xFF5B5D5E).withOpacity(0.8),
+                  color: const Color(0xFF5B5D5E).withOpacity(0.8),
                 ),
               ),
             ],
@@ -57,4 +86,3 @@ class _GradientItemState extends State<GradientItem> {
     );
   }
 }
-

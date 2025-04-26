@@ -30,4 +30,3 @@ class TimeRecipe extends StatelessWidget {
     );
   }
 }
-

@@ -26,7 +26,7 @@ class DetailsBody extends StatelessWidget {
               children: [
                 LabelIngredientButton(recipe: recipe,),
                 Text(
-                  'Steps to Prepare Classic Caesar Chicken',
+                  'Steps to Prepare ${recipe.name}',
                   style: TextStyle(
                     fontFamily: 'SansitaOne',
                     fontSize: 23,
@@ -43,4 +43,3 @@ class DetailsBody extends StatelessWidget {
     );
   }
 }
-

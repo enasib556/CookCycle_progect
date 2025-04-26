@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+
 import '../../utilis/color.dart';
 
-class CustomElevaterdButton extends StatelessWidget {
+class CustomElevatedButton extends StatelessWidget {
   final String text;
   final Widget? icon;
   final VoidCallback? onPress;
 
-  const CustomElevaterdButton({
+  const CustomElevatedButton({
     super.key,
     required this.text,
     this.icon,
@@ -16,7 +17,7 @@ class CustomElevaterdButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPress, // ✅ هنا المشكلة كانت
+      onPressed: onPress, // هذا الزر الآن يستدعي onPress عند الضغط
       style: ElevatedButton.styleFrom(
         backgroundColor: AuthColorButton,
         minimumSize: const Size(317, 66),
