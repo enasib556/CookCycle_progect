@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/recipe_model.dart';
 
 class NamePriceColumn extends StatelessWidget {
-  final Ingredients ingredient;
+  final Ingredient ingredient;
 
   const NamePriceColumn({super.key, required this.ingredient});
 

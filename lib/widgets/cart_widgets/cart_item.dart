@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:university_graduate_project/widgets/cart_widgets/quanitity_counter.dart';
-
 import '../../models/recipe_model.dart';
-import 'name_price_Column.dart';
+import 'name_price_column.dart';
+import 'quanitity_counter.dart';
+import '../../utilis/color.dart'; // تأكد إن عندك ملف الألوان
 
 class CartItem extends StatelessWidget {
-  final Ingredients ingredient;
+  final Ingredient ingredient;
 
   const CartItem({super.key, required this.ingredient});
 
@@ -14,7 +14,10 @@ class CartItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
       child: Container(
+        height: 135,
         decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
@@ -23,19 +26,16 @@ class CartItem extends StatelessWidget {
               offset: const Offset(0, 3),
             ),
           ],
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
         ),
-        height: 135,
         child: Row(
           children: [
-            // الصورة
+            // ✅ صورة المنتج
             Padding(
               padding: const EdgeInsets.only(left: 12.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: ingredient.imageUrl != null
-                    ? Image.network( // استخدم Network بدل Asset عشان API
+                    ? Image.network(
                   ingredient.imageUrl!,
                   width: 98,
                   height: 113,
@@ -48,40 +48,79 @@ class CartItem extends StatelessWidget {
                 ),
               ),
             ),
-            // العمود اللي فيه الاسم والسعر
+
+            // ✅ العمود الخاص بالاسم والسعر والأيقونات
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: NamePriceColumn(ingredient: ingredient),
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // الاسم
+                    SizedBox(
+                      width: 150,
+                      child: Text(
+                        ingredient.name ?? '',
+                        style: const TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    // السعر
+                    Text(
+                      'Price: \$${ingredient.price}',
+
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black.withOpacity(0.36),
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    const Spacer(),
+                    // الأيقونات: مفضلة وحذف
+                    Row(
+                      children: [
+                        Container(
+                          width: 35,
+                          height: 35,
+                          decoration: BoxDecoration(
+                            color: colorCard,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Icon(
+                            Icons.favorite_border,
+                            size: 24,
+                            color: colorIconCart,
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        Container(
+                          width: 35,
+                          height: 35,
+                          decoration: BoxDecoration(
+                            color: colorCard,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Icon(
+                            Icons.delete,
+                            size: 24,
+                            color: colorIconCart,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-            // العدادات
-            QuanitityCounter(),
+
+            // ✅ العداد
+            const QuanitityCounter(),
             const SizedBox(width: 17),
-            // الأيقونات (المفضلة والحذف)
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.favorite_border,
-                    color: Colors.red,
-                  ),
-                  onPressed: () {
-                    // هنا ممكن تضيف اللوجيك الخاص بالمفضلة
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.delete,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    // هنا ممكن تضيف اللوجيك الخاص بالحذف
-                  },
-                ),
-              ],
-            ),
           ],
         ),
       ),

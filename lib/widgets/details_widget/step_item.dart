@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:university_graduate_project/models/recipe_model.dart';
 
 class StepItem extends StatelessWidget {
-  final Steps step;
+  final StepModel step;
   final int index;
   final int totalSteps;
   const StepItem({super.key, required this.index, required this.step, required this.totalSteps});

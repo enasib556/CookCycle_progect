@@ -12,7 +12,7 @@ class CatListView extends StatefulWidget {
 }
 
 class _CatListViewState extends State<CatListView> {
-  List<Ingredients> shoppingList = [];
+  List<Ingredient> shoppingList = [];
 
   @override
   void initState() {
@@ -25,14 +25,30 @@ class _CatListViewState extends State<CatListView> {
     List<String>? selectedJsonList = prefs.getStringList('shopping_list');
 
     if (selectedJsonList != null) {
-      List<Ingredients> loadedList = selectedJsonList.map((jsonString) {
-        return Ingredients.fromJson(json.decode(jsonString));
+      List<Ingredient> loadedList = selectedJsonList.map((jsonString) {
+        return Ingredient.fromJson(json.decode(jsonString));
       }).toList();
 
       setState(() {
         shoppingList = loadedList;
       });
     }
+  }
+
+  Future<void> addIngredient(Ingredient newIngredient) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? selectedJsonList = prefs.getStringList('shopping_list') ?? [];
+
+    // إضافة المكون الجديد إلى القائمة
+    selectedJsonList.add(json.encode(newIngredient.toJson()));
+
+    // حفظ القائمة المحدثة في SharedPreferences
+    await prefs.setStringList('shopping_list', selectedJsonList);
+
+    // تحديث الواجهة بعد إضافة المكون
+    setState(() {
+      shoppingList.add(newIngredient);
+    });
   }
 
   @override

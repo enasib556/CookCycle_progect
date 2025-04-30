@@ -55,7 +55,7 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final ingredients = widget.recipe.ingredients ?? [];
 
-    List<Ingredients> selectedItems = [];
+    List<Ingredient> selectedItems = [];
     for (int i = 0; i < ingredients.length; i++) {
       if (selectedIngredients![i]) {
         selectedItems.add(ingredients[i]);

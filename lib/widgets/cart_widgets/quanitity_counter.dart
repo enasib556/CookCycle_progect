@@ -39,9 +39,9 @@ class _QuanitityCounterState extends State<QuanitityCounter> {
               right: -10,
               child: GestureDetector(
                 onTap: () {
-                 setState(() {
-                   quantity++;
-                 });
+                  setState(() {
+                    quantity++;
+                  });
                 },
                 child: CustomContainer(
                   width: 24,
@@ -79,4 +79,3 @@ class _QuanitityCounterState extends State<QuanitityCounter> {
     );
   }
 }
-

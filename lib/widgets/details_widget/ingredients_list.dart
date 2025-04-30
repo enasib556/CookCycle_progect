@@ -21,7 +21,7 @@ class IngredientsList extends StatefulWidget {
 }
 
 class _IngredientsListState extends State<IngredientsList> {
-  late List<Ingredients> ingredients;
+  late List<Ingredient> ingredients;
 
   @override
   void initState() {

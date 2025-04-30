@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/recipe_model.dart';
 
 class GradientItem extends StatefulWidget {
-  final Ingredients ingredients;
+  final Ingredient ingredients;
   final Function(int, bool) onSelectionChanged;
 
   const GradientItem({

@@ -1,24 +1,27 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:university_graduate_project/models/recipe_model.dart';
 import 'package:university_graduate_project/manager/ingredient/ingre_state.dart';
-
-import '../../models/recipe_model.dart';
-import '../../network/apiService.dart';
+import 'package:university_graduate_project/network/apiService.dart';
 
 class IngredientCubit extends Cubit<IngredientsState> {
-  final ApiService apiService = ApiService();
   IngredientCubit() : super(IngredientsInitial());
+
+  final ApiService apiService = ApiService();
 
   void fetchIngredients(String recipeId) async {
     emit(IngredientsLoading());
     try {
-      final json = await apiService.get('ingredients/$recipeId');
-      List<Ingredients> ingredients = [];
-      for (var item in json.data) {
-        ingredients.add(Ingredients.fromJson(item));
+      final response = await apiService.get('ingredients/$recipeId');
+
+      List<Ingredient> ingredients = [];
+
+      for (var item in response.data) {
+        ingredients.add(Ingredient.fromJson(item));
       }
+
       emit(IngredientsLoaded(ingredients));
     } catch (e) {
-      emit(IngredientsError(e.toString()));
+      emit(IngredientsError('حدث خطأ أثناء جلب المكونات: ${e.toString()}'));
     }
   }
 }

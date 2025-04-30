@@ -1,4 +1,4 @@
-import '../../models/recipe_model.dart'; // لأن Ingredients جوه Recipe Model
+import '../../models/recipe_model.dart'; // لأن Ingredient موجود في نفس الموديل
 
 abstract class IngredientsState {}
 
@@ -12,6 +12,6 @@ class IngredientsError extends IngredientsState {
 }
 
 class IngredientsLoaded extends IngredientsState {
-  final List<Ingredients> ingredientsList;
+  final List<Ingredient> ingredientsList;
   IngredientsLoaded(this.ingredientsList);
 }
