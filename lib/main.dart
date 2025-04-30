@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'manager/recipe_cubit/recipe_cubit.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<RecipeCubit>(create: (context) => RecipeCubit()..fetchRecipe()),
         BlocProvider<RegisterCubit>(create: (context) => RegisterCubit()),
         BlocProvider<LoginCubit>(create: (context) => LoginCubit()),
+
       ],
       child: MaterialApp(
         theme: ThemeData.light().copyWith(scaffoldBackgroundColor: backgroundColor),

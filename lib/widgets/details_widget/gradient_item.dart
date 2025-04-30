@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../models/recipe_model.dart';
 
 class GradientItem extends StatefulWidget {
@@ -18,7 +17,7 @@ class GradientItem extends StatefulWidget {
 }
 
 class _GradientItemState extends State<GradientItem> {
-  bool isSelected = false; // ✅ تم تهيئته مباشرة
+  bool isSelected = false;
 
   @override
   void initState() {
@@ -28,7 +27,8 @@ class _GradientItemState extends State<GradientItem> {
 
   void loadSelectionState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool savedState = prefs.getBool('ingredient_${widget.ingredients.ingredientId}') ?? widget.ingredients.isSelected;
+    bool savedState = prefs.getBool('ingredient_${widget.ingredients.ingredientId}') ??
+        widget.ingredients.isSelected;
     setState(() {
       isSelected = savedState;
     });
@@ -50,13 +50,19 @@ class _GradientItemState extends State<GradientItem> {
               setState(() {
                 isSelected = !isSelected;
                 widget.ingredients.isSelected = isSelected;
+
+                // ✅ التأكد من وجود recipeId
+                if (widget.ingredients.recipeId == null) {
+                  widget.ingredients.recipeId = 0; // ← ضع هنا ID الوصفة الحقيقي إن توفر
+                }
+
                 saveSelectionState(isSelected);
                 widget.onSelectionChanged(widget.ingredients.ingredientId!, isSelected);
               });
             },
             child: Icon(
               Icons.check_outlined,
-              color: isSelected ? Color(0xFF00643A) : Color(0xFFC6C6C6),
+              color: isSelected ? const Color(0xFF00643A) : const Color(0xFFC6C6C6),
               size: 30,
             ),
           ),

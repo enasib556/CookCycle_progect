@@ -35,6 +35,7 @@ class _CatListViewState extends State<CatListView> {
     }
   }
 
+
   Future<void> addIngredient(Ingredient newIngredient) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? selectedJsonList = prefs.getStringList('shopping_list') ?? [];

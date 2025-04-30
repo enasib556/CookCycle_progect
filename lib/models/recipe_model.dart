@@ -31,31 +31,24 @@ class Recipe {
     smallDisc = json['Small_Disc'];
 
     if (json['Steps'] != null) {
-      steps = (json['Steps'] as List)
-          .map((v) => StepModel.fromJson(v))
-          .toList();
+      steps = (json['Steps'] as List).map((v) => StepModel.fromJson(v)).toList();
     }
-
     if (json['Ingredients'] != null) {
-      ingredients = (json['Ingredients'] as List)
-          .map((v) => Ingredient.fromJson(v))
-          .toList();
+      ingredients = (json['Ingredients'] as List).map((v) => Ingredient.fromJson(v)).toList();
     }
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'Recipe_id': recipeId,
-      'Name': name,
-      'Image_url': imageUrl,
-      'Video_link': videoLink,
-      'Duration': duration,
-      'Disc': disc,
-      'Small_Disc': smallDisc,
-      'Steps': steps?.map((v) => v.toJson()).toList(),
-      'Ingredients': ingredients?.map((v) => v.toJson()).toList(),
-    };
-  }
+  Map<String, dynamic> toJson() => {
+    'Recipe_id': recipeId,
+    'Name': name,
+    'Image_url': imageUrl,
+    'Video_link': videoLink,
+    'Duration': duration,
+    'Disc': disc,
+    'Small_Disc': smallDisc,
+    'Steps': steps?.map((v) => v.toJson()).toList(),
+    'Ingredients': ingredients?.map((v) => v.toJson()).toList(),
+  };
 }
 
 class StepModel {
@@ -64,12 +57,7 @@ class StepModel {
   String? instructions;
   String? imageUrl;
 
-  StepModel({
-    this.stepId,
-    this.stepNumber,
-    this.instructions,
-    this.imageUrl,
-  });
+  StepModel({this.stepId, this.stepNumber, this.instructions, this.imageUrl});
 
   StepModel.fromJson(Map<String, dynamic> json) {
     stepId = json['Step_id'];
@@ -78,18 +66,17 @@ class StepModel {
     imageUrl = json['Image_url'];
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'Step_id': stepId,
-      'Step_number': stepNumber,
-      'Instructions': instructions,
-      'Image_url': imageUrl,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+    'Step_id': stepId,
+    'Step_number': stepNumber,
+    'Instructions': instructions,
+    'Image_url': imageUrl,
+  };
 }
 
 class Ingredient {
   int? ingredientId;
+  int? recipeId; // ← NEW
   String? name;
   String? price;
   String? imageUrl;
@@ -98,6 +85,7 @@ class Ingredient {
 
   Ingredient({
     this.ingredientId,
+    this.recipeId, // ← NEW
     this.name,
     this.price,
     this.imageUrl,
@@ -107,20 +95,21 @@ class Ingredient {
 
   Ingredient.fromJson(Map<String, dynamic> json)
       : ingredientId = json['Ingredient_id'],
+        recipeId = json['Recipe_id'], // ← NEW
         name = json['Name'],
         price = json['Price']?.toString() ?? '',
         imageUrl = json['Image_url'],
         quantity = json['Quantity'],
         isSelected = json['isSelected'] ?? false;
 
-  Map<String, dynamic> toJson() {
-    return {
-      'Ingredient_id': ingredientId,
-      'Name': name,
-      'Price': price,
-      'Image_url': imageUrl,
-      'Quantity': quantity,
-      'isSelected': isSelected,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+    'Ingredient_id': ingredientId,
+    'Recipe_id': recipeId, // ← NEW
+    'Name': name,
+    'Price': price,
+    'Image_url': imageUrl,
+    'Quantity': quantity,
+    'isSelected': isSelected,
+  };
 }
+

@@ -55,20 +55,32 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final ingredients = widget.recipe.ingredients ?? [];
 
-    List<Ingredient> selectedItems = [];
+    List<String> existingList = prefs.getStringList('shopping_list') ?? [];
+
+    // Decode the existing list
+    List<Ingredient> allIngredients = existingList.map((e) => Ingredient.fromJson(jsonDecode(e))).toList();
+
+    // Remove ingredients with same recipeId to avoid duplicates
+    allIngredients.removeWhere((i) => i.recipeId == widget.recipe.recipeId);
+
+    // Add new selected ingredients
     for (int i = 0; i < ingredients.length; i++) {
       if (selectedIngredients![i]) {
-        selectedItems.add(ingredients[i]);
+        Ingredient ing = ingredients[i];
+        ing.recipeId = widget.recipe.recipeId;
+        allIngredients.add(ing);
       }
     }
 
-    List<String> selectedJsonList = selectedItems.map((i) => jsonEncode(i.toJson())).toList();
-    await prefs.setStringList('shopping_list', selectedJsonList);
+    // Convert back to JSON and save
+    List<String> updatedList = allIngredients.map((i) => jsonEncode(i.toJson())).toList();
+    await prefs.setStringList('shopping_list', updatedList);
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('تمت إضافة المكونات إلى السلة!')),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -100,13 +112,13 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
             height: 66,
             child: CustomElevatedButton(
               text: 'Add TO Shopping List ${selectedCount > 0 ? '($selectedCount)' : ''}',
-              onPress: () async {
+              onPress: ()  {
                 if (selectedCount == 0) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('من فضلك اختر مكونات أولاً')),
                   );
                 } else {
-                  await saveSelectedToShoppingList();
+                   saveSelectedToShoppingList();
                 }
               },
               icon: const Icon(
