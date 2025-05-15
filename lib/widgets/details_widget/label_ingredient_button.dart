@@ -27,15 +27,20 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final ingredients = widget.recipe.ingredients ?? [];
 
+    // إذا لم تكن هناك بيانات مخزنة، نقوم بتعيين كل العناصر كـ false
     List<bool> loadedList = List.generate(
       ingredients.length,
           (index) => prefs.getBool('ingredient_${ingredients[index].ingredientId}') ?? false,
     );
 
+    // تعيين القيمة بعد تحميل البيانات من SharedPreferences
     setState(() {
       selectedIngredients = loadedList;
     });
   }
+
+
+
 
   void updateSelectedIngredients(int index, bool isSelected) async {
     if (selectedIngredients == null || index >= selectedIngredients!.length) return;
@@ -50,6 +55,8 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
       prefs.setBool('ingredient_$ingredientId', isSelected);
     }
   }
+
+
 
   Future<void> saveSelectedToShoppingList() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -77,8 +84,11 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
     await prefs.setStringList('shopping_list', updatedList);
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('تمت إضافة المكونات إلى السلة!')),
+      const SnackBar(content: Text('Ingredients added to cart!')),
     );
+
+    // بعد إضافة المكونات إلى السلة، نرجع للقائمة الرئيسية مع التحديث
+     // هنا نرسل النتيجة
   }
 
 
@@ -88,6 +98,7 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
       return const Center(child: CircularProgressIndicator());
     }
 
+    // حساب عدد العناصر المختارة
     final selectedCount = selectedIngredients!.where((e) => e).length;
 
     return SingleChildScrollView(
@@ -111,14 +122,14 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
             width: MediaQuery.of(context).size.width * 0.8,
             height: 66,
             child: CustomElevatedButton(
-              text: 'Add TO Shopping List ${selectedCount > 0 ? '($selectedCount)' : ''}',
-              onPress: ()  {
+              text: 'Add To Shopping List ${selectedCount > 0 ? '($selectedCount)' : ''}',  // عرض عدد العناصر المختارة
+              onPress: () {
                 if (selectedCount == 0) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('من فضلك اختر مكونات أولاً')),
+                    const SnackBar(content: Text('Please, choose ingredients first!')),
                   );
                 } else {
-                   saveSelectedToShoppingList();
+                  saveSelectedToShoppingList();
                 }
               },
               icon: const Icon(
@@ -133,4 +144,6 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
       ),
     );
   }
+
+
 }

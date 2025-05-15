@@ -33,7 +33,7 @@ class _IngredientsListState extends State<IngredientsList> {
     );
   }
 
-  void toggleSelection(int index) {
+  void toggleSelection(int index) async {
     setState(() {
       ingredients[index].isSelected = !ingredients[index].isSelected;
       widget.onSelectionChanged(index, ingredients[index].isSelected);
@@ -42,7 +42,14 @@ class _IngredientsListState extends State<IngredientsList> {
         widget.selectedIngredients[index] = ingredients[index].isSelected;
       }
     });
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final ingredientId = widget.recipe.ingredients?[index].ingredientId;
+    if (ingredientId != null) {
+      prefs.setBool('ingredient_$ingredientId', ingredients[index].isSelected);
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {

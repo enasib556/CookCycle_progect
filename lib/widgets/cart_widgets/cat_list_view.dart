@@ -35,27 +35,26 @@ class _CatListViewState extends State<CatListView> {
     }
   }
 
-
-  Future<void> addIngredient(Ingredient newIngredient) async {
+  Future<void> deleteIngredient(int index) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? selectedJsonList = prefs.getStringList('shopping_list') ?? [];
 
-    // إضافة المكون الجديد إلى القائمة
-    selectedJsonList.add(json.encode(newIngredient.toJson()));
+    // حذف المكون من القائمة
+    selectedJsonList.removeAt(index);
 
     // حفظ القائمة المحدثة في SharedPreferences
     await prefs.setStringList('shopping_list', selectedJsonList);
 
-    // تحديث الواجهة بعد إضافة المكون
+    // تحديث الواجهة بعد الحذف
     setState(() {
-      shoppingList.add(newIngredient);
+      shoppingList.removeAt(index);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     if (shoppingList.isEmpty) {
-      return const Center(child: Text('لا يوجد مكونات مضافة بعد'));
+      return const Center(child: Text('No added ingredients yet'));
     }
 
     return ListView.builder(
@@ -65,6 +64,8 @@ class _CatListViewState extends State<CatListView> {
       itemBuilder: (context, index) {
         return CartItem(
           ingredient: shoppingList[index],
+          loadShoppingList: loadShoppingList,  // تمرير الدالة هنا
+           // إضافة حدث الحذف
         );
       },
     );

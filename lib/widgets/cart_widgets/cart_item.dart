@@ -6,8 +6,10 @@ import '../../utilis/color.dart'; // تأكد إن عندك ملف الألوا�
 
 class CartItem extends StatelessWidget {
   final Ingredient ingredient;
+  final Function loadShoppingList; // الدالة التي ستقوم بتحميل قائمة التسوق بعد التعديل
 
-  const CartItem({super.key, required this.ingredient});
+
+  const CartItem({super.key, required this.ingredient, required this.loadShoppingList,});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class CartItem extends StatelessWidget {
               padding: const EdgeInsets.only(left: 12.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: ingredient.imageUrl != null
+                child: ingredient.imageUrl != null && ingredient.imageUrl!.isNotEmpty
                     ? Image.network(
                   ingredient.imageUrl!,
                   width: 98,
