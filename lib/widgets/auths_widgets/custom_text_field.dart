@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import '../../utilis/color.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final String label;
   final String hint;
-  bool isPassword;
+  final bool isPassword;
   final TextEditingController controller;
   final String? Function(String?)? validator;
 
-  CustomTextField({
+  const CustomTextField({
     super.key,
     required this.label,
     required this.hint,
@@ -18,54 +18,77 @@ class CustomTextField extends StatelessWidget {
   });
 
   @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  late bool _obscureText;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.isPassword;
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
+          widget.label,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: darkGreen, // اللون الرمادي
+            color: darkGreen,
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         TextFormField(
-          controller: controller,
-          validator: validator ?? (input) {
-            if (input?.isEmpty ?? true) {
-              return '$label must not be empty';
-            }
-            return null;
-          },
-          obscureText: isPassword,
-          onChanged: (value) {
-            print('$label: $value'); // 👈 يطبع القيمة وقت ما المستخدم يكتب
-          },
+          controller: widget.controller,
+          validator: widget.validator ??
+                  (input) {
+                if (input?.isEmpty ?? true) {
+                  return '${widget.label} must not be empty';
+                }
+                return null;
+              },
+          obscureText: _obscureText,
           decoration: InputDecoration(
-            hintText: hint,
-            hintStyle: TextStyle(color: Color(0xff6E7370).withOpacity(0.81)),
+            hintText: widget.hint,
+            hintStyle: TextStyle(color: const Color(0xff6E7370).withOpacity(0.81)),
             filled: true,
             fillColor: Colors.white,
-            contentPadding: EdgeInsets.symmetric(
+            contentPadding: const EdgeInsets.symmetric(
               vertical: 14,
               horizontal: 16,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide(color: Color(0xff6E7370)),
+              borderSide: const BorderSide(color: Color(0xff6E7370)),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide(color: Color(0xffBEC0BF)),
+              borderSide: const BorderSide(color: Color(0xffBEC0BF)),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide(color: Color(0xffA8BBB3), width: 2),
+              borderSide: const BorderSide(color: Color(0xffA8BBB3), width: 2),
             ),
-            suffixIcon: isPassword
-                ? Icon(Icons.visibility_off, color: Color(0xffBEC0BF))
+            suffixIcon: widget.isPassword
+                ? IconButton(
+              icon: Icon(
+                _obscureText ? Icons.visibility_off : Icons.visibility,
+                color: const Color(0xffBEC0BF),
+              ),
+              onPressed: _togglePasswordVisibility,
+            )
                 : null,
           ),
         ),

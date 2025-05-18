@@ -39,7 +39,7 @@ class _FavouriteListViewState extends State<FavouriteListView> {
         itemCount: _favourites.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
             child: FavouriteCard(
               recipe: _favourites[index],
               onUnfavourite: () => _removeFromFavourites(_favourites[index]),

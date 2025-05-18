@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Searchbar extends StatelessWidget {
-  const Searchbar({super.key});
+  final ValueChanged<String> onChanged;
+  const Searchbar({super.key, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: TextField(
+        onChanged: onChanged,
         decoration: InputDecoration(
           hintText: "Search...",
           hintStyle:
@@ -16,7 +18,6 @@ class Searchbar extends StatelessWidget {
             Icons.search,
             color: Colors.green.shade900,
           ),
-          suffixIcon: Icon(Icons.camera_alt, color: Colors.green.shade900),
           filled: true,
           fillColor: Color(0xffDDE5E5), // خلفية الحقل
           border: OutlineInputBorder(

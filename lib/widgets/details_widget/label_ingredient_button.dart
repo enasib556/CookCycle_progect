@@ -44,7 +44,6 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
 
   void updateSelectedIngredients(int index, bool isSelected) async {
     if (selectedIngredients == null || index >= selectedIngredients!.length) return;
-
     setState(() {
       selectedIngredients![index] = isSelected;
     });
@@ -119,10 +118,10 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
           ),
           const SizedBox(height: 10),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
+            width: MediaQuery.of(context).size.width  ,
             height: 66,
             child: CustomElevatedButton(
-              text: 'Add To Shopping List ${selectedCount > 0 ? '($selectedCount)' : ''}',  // عرض عدد العناصر المختارة
+              text: 'Add To Shopping List${selectedCount > 0 ? '($selectedCount)' : ''}',  // عرض عدد العناصر المختارة
               onPress: () {
                 if (selectedCount == 0) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -144,6 +143,4 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
       ),
     );
   }
-
-
 }

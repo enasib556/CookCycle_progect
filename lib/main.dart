@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
 
       ],
       child: MaterialApp(
-        theme: ThemeData.light().copyWith(scaffoldBackgroundColor: backgroundColor),
+        theme: ThemeData.light().copyWith(scaffoldBackgroundColor: beige),
         debugShowCheckedModeBanner: false,
         home: isLoggedIn ? HomeScreen() : SplashScreen(), // إذا كان مستخدم مسجل دخول، يعرض الشاشة الرئيسية
       ),

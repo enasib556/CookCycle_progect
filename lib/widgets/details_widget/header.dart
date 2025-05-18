@@ -24,7 +24,7 @@ class Header extends StatelessWidget {
         Positioned(
           bottom: 10,
           left: 12,
-          child: Recipeword(text: recipe.name!, fontSize: 26),
+          child: Recipeword(text: recipe.name!, fontSize: 25),
         ),
       ],
     );

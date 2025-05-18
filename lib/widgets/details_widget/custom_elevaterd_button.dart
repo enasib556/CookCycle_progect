@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../utilis/color.dart';
 
@@ -6,12 +7,13 @@ class CustomElevatedButton extends StatelessWidget {
   final String text;
   final Widget? icon;
   final VoidCallback? onPress;
+  final Color? color;
 
   const CustomElevatedButton({
     super.key,
     required this.text,
     this.icon,
-    this.onPress,
+    this.onPress, this.color,
   });
 
   @override
@@ -19,7 +21,7 @@ class CustomElevatedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPress, // هذا الزر الآن يستدعي onPress عند الضغط
       style: ElevatedButton.styleFrom(
-        backgroundColor: AuthColorButton,
+        backgroundColor: color ?? AuthColorButton,
         minimumSize: const Size(317, 66),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -32,9 +34,9 @@ class CustomElevatedButton extends StatelessWidget {
           const SizedBox(width: 15),
           Text(
             text,
-            style: const TextStyle(
-              fontFamily: 'SansitaOne',
-              fontSize: 20,
+            style:  GoogleFonts.roboto(
+              fontWeight: FontWeight.w500,
+              fontSize: 25,
               color: Colors.white,
             ),
           ),

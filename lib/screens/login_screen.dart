@@ -97,12 +97,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   height: 161,
                                   fit: BoxFit.cover,
                                 ),
+                                const SizedBox(height: 20),
                                 Image.asset(
-                                  AppImages.cookCycle,
-                                  width: 508,
-                                  height: 80,
-                                  fit: BoxFit.cover,
+                                  AppImages.camCook,
+                                  width: 200,
+                                  fit: BoxFit.fill,
                                 ),
+                                const SizedBox(height: 8),
                                 CustomTextField(
                                   label: "Email",
                                   hint: "Enter your email...",

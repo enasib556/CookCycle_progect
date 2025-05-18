@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:university_graduate_project/utilis/color.dart';
 import 'package:university_graduate_project/widgets/home_widgets/recipe_word.dart';
 import 'package:university_graduate_project/widgets/home_widgets/search_bar.dart';
 import 'package:university_graduate_project/widgets/home_widgets/header_clipper.dart';
 import 'grid_view_recipe.dart';
 
-class HomeWidget extends StatelessWidget {
+class HomeWidget extends StatefulWidget {
   const HomeWidget({super.key});
 
+  @override
+  State<HomeWidget> createState() => _HomeWidgetState();
+}
+
+class _HomeWidgetState extends State<HomeWidget> {
+  String searchQuery = "";
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -33,7 +38,13 @@ class HomeWidget extends StatelessWidget {
               SizedBox(height: 60),
               Padding(
                 padding: const EdgeInsets.all(10),
-                child: Searchbar(),
+                child: Searchbar(
+                   onChanged: (value) {
+                     setState(() {
+                       searchQuery = value;
+                     });
+                   },
+                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
@@ -42,7 +53,7 @@ class HomeWidget extends StatelessWidget {
                   fontSize: 28,
                 ),
               ),
-              GridViewRecipe(),
+              GridViewRecipe(searchQuery: searchQuery,),
               SizedBox(height: 10),
             ],
           ),

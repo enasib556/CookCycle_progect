@@ -3,6 +3,7 @@ import 'package:university_graduate_project/screens/details_screen.dart';
 import '../../models/recipe_model.dart';
 import '../../network/favourite_service.dart';
 import '../../utilis/color.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class RecipeCard extends StatefulWidget {
   final Recipe recipe;
@@ -58,17 +59,21 @@ class _RecipeCardState extends State<RecipeCard> {
                   ),
                 ),
                 Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
                   child: SizedBox(
-                      width: 110,
-                      child: Text(
-                        widget.recipe.name??"",
-                        style: TextStyle(
-                          fontFamily: 'SansitaOne',
-                          fontSize: 12.5,
-                          color: Color(0xff666967),
-                        )))
+                    width: 110,
+                    child: AutoSizeText(
+                      widget.recipe.name ?? "",
+                      style: TextStyle(
+                        fontFamily: 'SansitaOne',
+                        fontSize: 12.8,
+                        color: Color(0xff666967),
+                      ),
+                      maxLines: 2,
+                      minFontSize: 8,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                 ),
                 SizedBox(height: 5),
               ],
@@ -76,7 +81,7 @@ class _RecipeCardState extends State<RecipeCard> {
             // أيقونة القلب في الأسفل على اليمين
             Positioned(
               right: 0,
-              bottom: 1,
+              bottom: 2,
               child: IconButton(
                 icon: Icon(isFavorite?Icons.favorite:Icons.favorite_border, color: colorElevatedButton, size: 26),
                 onPressed: () async {

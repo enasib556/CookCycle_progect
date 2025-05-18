@@ -4,12 +4,14 @@ import '../../models/recipe_model.dart';
 
 class GradientItem extends StatefulWidget {
   final Ingredient ingredients;
+  final int index; // ← أضف هذا
   final Function(int, bool) onSelectionChanged;
 
   const GradientItem({
     super.key,
     required this.ingredients,
     required this.onSelectionChanged,
+    required this.index,
   });
 
   @override
@@ -50,7 +52,7 @@ class _GradientItemState extends State<GradientItem> {
               setState(() {
                 isSelected = !isSelected;
                 widget.ingredients.isSelected = isSelected;
-
+                widget.onSelectionChanged(widget.index, isSelected); // ← استخدم index الحقيقي
                 // ✅ التأكد من وجود recipeId
                 if (widget.ingredients.recipeId == null) {
                   widget.ingredients.recipeId = 0; // ← ضع هنا ID الوصفة الحقيقي إن توفر

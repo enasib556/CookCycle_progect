@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import '../../data.dart';
 import '../../models/recipe_model.dart';
 import '../../utilis/color.dart';
 

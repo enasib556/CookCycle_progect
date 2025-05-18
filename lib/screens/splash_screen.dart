@@ -62,7 +62,8 @@ class _SplashScreenState extends State<SplashScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 40),
-              Image.asset(AppImages.cookCycle, width: 508, height: 80, fit: BoxFit.cover),
+              Image.asset(AppImages.camCook, width: 250, fit: BoxFit.fill),
+              SizedBox(height: 33),
               DesciptionText(),
               SizedBox(height: 25),
               Container(

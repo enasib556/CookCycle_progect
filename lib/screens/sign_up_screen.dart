@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:university_graduate_project/manager/auth_cubit/register_cubit.dart';
-import 'package:university_graduate_project/screens/home_screen.dart';
 import 'package:university_graduate_project/screens/login_screen.dart';
 import 'package:university_graduate_project/utilis/color.dart';
 import '../manager/auth_cubit/register_state.dart';
@@ -77,12 +76,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   height: 100,
                                   fit: BoxFit.cover,
                                 ),
-                                const SizedBox(height: 2),
+                                const SizedBox(height: 10),
                                 Image.asset(
-                                  AppImages.cookCycle,
-                                  width: 508,
-                                  height: 65,
-                                  fit: BoxFit.cover,
+                                  AppImages.camCook,
+                                  width: 200,
+                                  fit: BoxFit.fill,
                                 ),
                                 CustomTextField(
                                   label: "Full Name",

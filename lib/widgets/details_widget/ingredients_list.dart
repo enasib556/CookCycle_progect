@@ -63,6 +63,7 @@ class _IngredientsListState extends State<IngredientsList> {
             return GestureDetector(
               onTap: () => toggleSelection(index),
               child: GradientItem(
+                index: index,
                 ingredients: ingredients[index],
                 onSelectionChanged: widget.onSelectionChanged,
               ),
