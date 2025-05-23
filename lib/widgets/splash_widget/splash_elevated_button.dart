@@ -13,7 +13,7 @@ class SplashElevatedButton extends StatelessWidget {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: colorElevatedButton,
+                  backgroundColor: AuthColorButton,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),

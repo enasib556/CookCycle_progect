@@ -100,7 +100,7 @@ class _FavouriteCardState extends State<FavouriteCard> {
                 onTap: () {
                   widget.onUnfavourite(); // نبلغ الليست إنه يتحذف
                 },
-                child: Icon(Icons.favorite, color: colorElevatedButton, size: 30),
+                child: Icon(Icons.favorite, color: AuthColorButton, size: 30),
               ),
             ),
           ],

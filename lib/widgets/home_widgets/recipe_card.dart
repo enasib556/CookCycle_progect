@@ -83,7 +83,7 @@ class _RecipeCardState extends State<RecipeCard> {
               right: 0,
               bottom: 2,
               child: IconButton(
-                icon: Icon(isFavorite?Icons.favorite:Icons.favorite_border, color: colorElevatedButton, size: 26),
+                icon: Icon(isFavorite?Icons.favorite:Icons.favorite_border, color: AuthColorButton, size: 26),
                 onPressed: () async {
                   await FavouriteService.toggleFavourite(widget.recipe);
                   bool fav = await FavouriteService.isFavourite(widget.recipe);

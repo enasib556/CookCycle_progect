@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:university_graduate_project/manager/auth_cubit/login_cubit.dart';
 import 'package:university_graduate_project/manager/auth_cubit/register_cubit.dart';
+import 'package:university_graduate_project/screens/detailsOfSuggested_screen.dart';
 import 'package:university_graduate_project/screens/splash_screen.dart';
 import 'package:university_graduate_project/screens/home_screen.dart';
 import 'package:university_graduate_project/utilis/color.dart';
@@ -36,7 +37,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData.light().copyWith(scaffoldBackgroundColor: beige),
         debugShowCheckedModeBanner: false,
-        home: isLoggedIn ? HomeScreen() : SplashScreen(), // إذا كان مستخدم مسجل دخول، يعرض الشاشة الرئيسية
+        home:
+        DetailsOfSuggestedScreen()
+        // isLoggedIn ? HomeScreen() : SplashScreen(), // إذا كان مستخدم مسجل دخول، يعرض الشاشة الرئيسية
       ),
     );
   }
