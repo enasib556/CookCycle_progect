@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:university_graduate_project/manager/auth_cubit/login_cubit.dart';
 import 'package:university_graduate_project/manager/auth_cubit/login_state.dart';
 import 'package:university_graduate_project/screens/home_screen.dart';
@@ -143,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SizedBox(height: 20),
                                 Text(
                                   'Don\'t have an account?',
-                                  style: TextStyle(color: darkGreen),
+                                  style:  GoogleFonts.roboto(color: darkGreen),
                                 ),
                                 SizedBox(height: 5),
                                 InkWell(
@@ -155,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   child: Text(
                                     'Sign up',
-                                    style: TextStyle(
+                                    style: GoogleFonts.roboto(
                                       color: darkGreen,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,

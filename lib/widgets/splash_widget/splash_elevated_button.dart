@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:university_graduate_project/utilis/color.dart';
 
 import '../../screens/login_screen.dart';
@@ -21,10 +22,9 @@ class SplashElevatedButton extends StatelessWidget {
                 ),
                 child: Text(
                   'Get Started',
-                  style: TextStyle(
-                    fontFamily: 'SansitaOne',
+                  style: GoogleFonts.roboto(
                     fontSize: 26,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w800,
                     color: Colors.white,
                   ),
                 ),

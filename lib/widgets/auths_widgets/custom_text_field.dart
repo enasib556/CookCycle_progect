@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../utilis/color.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -43,10 +44,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
       children: [
         Text(
           widget.label,
-          style: TextStyle(
+          style: GoogleFonts.roboto(
             fontWeight: FontWeight.bold,
             color: darkGreen,
-            fontSize: 16,
+            fontSize: 17,
           ),
         ),
         const SizedBox(height: 5),

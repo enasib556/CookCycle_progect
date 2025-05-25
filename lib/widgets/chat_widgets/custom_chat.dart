@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:record/record.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -45,10 +46,10 @@ class _CustomChatState extends State<CustomChat> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(
+        title:  Text(
           'choose image source',
-          style: TextStyle(
-            fontFamily: 'SansitaOne',
+          style: GoogleFonts.roboto(
+            fontWeight: FontWeight.bold,
             color: Color(0xFF00643A),
             fontSize: 20,
           ),
@@ -58,8 +59,8 @@ class _CustomChatState extends State<CustomChat> {
           children: [
             ListTile(
               leading: const Icon(Icons.image, color: Color(0xFF00643A)),
-              title: const Text('gallery', style: TextStyle(
-                fontFamily: 'SansitaOne',
+              title:  Text('gallery', style: GoogleFonts.roboto(
+                fontWeight: FontWeight.w400,
                 color: Color(0xFF00643A),
                 fontSize: 15
               )),
@@ -70,8 +71,8 @@ class _CustomChatState extends State<CustomChat> {
             ),
             ListTile(
               leading: const Icon(Icons.camera, color: Color(0xFF00643A)),
-              title: const Text('camera', style: TextStyle(
-                fontFamily: 'SansitaOne',
+              title:  Text('camera', style: GoogleFonts.roboto(
+                fontWeight: FontWeight.w400,
                 color: Color(0xFF00643A),
                 fontSize: 15,
               )),

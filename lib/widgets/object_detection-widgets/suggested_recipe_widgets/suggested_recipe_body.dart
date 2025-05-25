@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,7 +23,7 @@ class SuggestedRecipeBody extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
           CustomImgae(imagePath: imagePath),
           SizedBox(height: 16),
           Text(
@@ -32,10 +31,11 @@ class SuggestedRecipeBody extends StatelessWidget {
             style: GoogleFonts.roboto(
               fontWeight: FontWeight.w800,
               color: AuthColorButton,
-              fontSize: 28,
+              fontSize: 24,
             ),
           ),
-          SuggestedList()
+          const SizedBox(height: 10),
+          SuggestedList(imagePath: imagePath,)
         ],
       ),
     );

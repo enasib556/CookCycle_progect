@@ -18,7 +18,7 @@ class InfoBoxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 140,
+      width: 100,
       height: 135,
       padding: const EdgeInsets.only(top: 30),
       decoration: BoxDecoration(
@@ -29,9 +29,9 @@ class InfoBoxWidget extends StatelessWidget {
         children: [
           Icon(icon, color: Colors.orange),
           const SizedBox(height: 8),
-          Text(label, style:  GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 12)),
+          Text(label, style:  GoogleFonts.roboto(fontWeight: FontWeight.w400, fontSize: 15,color: Color(0xFF6E7370))),
           const SizedBox(height: 4),
-          Text(value, style:  GoogleFonts.roboto(fontSize: 12)),
+          Text(value, style:  GoogleFonts.roboto(fontSize: 12, color: Color(0xFF6E7370),fontWeight: FontWeight.w900,)),
         ],
       ),
     );

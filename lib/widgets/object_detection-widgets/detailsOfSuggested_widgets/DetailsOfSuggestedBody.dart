@@ -24,27 +24,30 @@ class DetailsOfSuggestedBody extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
           // نضعهم داخل Center أو Column بمحاذاة center
           Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children:  [
                 RecipeName(),
-
+                SizedBox(height: 10),
                 RecipeImageWidget(),
                 RecipeInfoGridWidget(),
                 IngredientsWidget(),
                 EquipmentsWidget(),
                 InstructionsWidget(),
                 NutritionalWidget(),
+                SizedBox(height: 10),
                 SizedBox(
-                  width: 300,  // العرض اللي تبيه أقل
+                  height: 50,
+                  width: 250,  // العرض اللي تبيه أقل
                   child: CustomElevatedButton(
                     text: 'Close Recipe',
                     onPress: () {Navigator.pop(context);},
                   ),
-                )
+                ),
+                SizedBox(height: 30),
               ],
             ),
           ),

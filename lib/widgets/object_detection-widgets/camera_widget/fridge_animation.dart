@@ -9,9 +9,9 @@ class FridgeAnimation extends StatelessWidget {
       child: Image.asset(AppImages.fridge3,width: 190,
         fit: BoxFit.fill,)
           .animate()
-          .moveY(begin: 0, end: -30, duration: 400.ms)
+          .moveY(begin: 0, end: -10, duration: 400.ms)
           .then()
-          .moveY(begin: -30, end: 0, duration: 400.ms)
+          .moveY(begin: -10, end: 0, duration: 400.ms)
           .then(delay: 200.ms)
           .moveY(begin: 0, end: -10, duration: 300.ms)
           .then()

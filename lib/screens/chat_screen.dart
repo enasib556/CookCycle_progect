@@ -31,7 +31,7 @@ class _ChatScreenState extends State<ChatScreen> {
               ClipPath(
                 clipper: HeaderClipper(),
                 child: Container(
-                  height: 140,
+                  height: 145,
                   width: double.infinity,
                   color: primaryColor,
                 ),
@@ -39,15 +39,21 @@ class _ChatScreenState extends State<ChatScreen> {
               Positioned(
                 bottom: 0,
                 right: 20,
-                left: 0,
+                left: 40,
                 top: 15,
-                child: Image.asset('assets/icons/1 (1).png', fit: BoxFit.cover),
+                child: Center(
+                  child: Image.asset(
+                    'assets/icons/CamCook_Chat.png',
+                    height: 45,
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
               Positioned(
                 top: 50,
                 left: 15,
                 child: IconButton(
-                  icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 28),
+                  icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 25),
                   onPressed: () {
                     Navigator.pushAndRemoveUntil(
                       context,

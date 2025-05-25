@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:university_graduate_project/models/recipe_model.dart';
 
 class StepItem extends StatelessWidget {
@@ -53,7 +54,8 @@ class StepItem extends StatelessWidget {
                     const SizedBox(height: 20),
                     Text(
                       step.instructions!,
-                      style: TextStyle(
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w400,
                         fontSize: 17,
                         color: Colors.black.withOpacity(0.5),
                       ),

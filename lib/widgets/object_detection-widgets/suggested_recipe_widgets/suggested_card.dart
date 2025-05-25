@@ -1,61 +1,77 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../models/detect_model.dart';
 import '../../../screens/detailsOfSuggested_screen.dart';
 
 class SuggestedCard extends StatelessWidget {
-  final int index;
-  const SuggestedCard({super.key, required this.index});
+  final RecipesDetect recipe;
+
+  const SuggestedCard({super.key, required this.recipe,});
 
   @override
   Widget build(BuildContext context) {
-    bool isOdd = index.isOdd;
-    return SizedBox(
-      width: 383,
-      height: 195,
-      child: GestureDetector(
-        onTap:() {Navigator.push(context,MaterialPageRoute(builder: (context)=> DetailsOfSuggestedScreen()));},
-        child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            elevation: 4,
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Row(
-                textDirection:
-                isOdd ? TextDirection.rtl : TextDirection.ltr,
-                children: [
-                  ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: Image.asset('assets/images/salmon-salad-international.png')),
-                  SizedBox(width: 10,),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Apple \n& Walnut Salad',
-                        style: GoogleFonts.roboto(
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xff6E7370),
-                          fontSize: 20,
-                        ),
-                      ),
-                      SizedBox(height: 17,),
-                      Text('4/6 ingredent\nAvaliable',
-                        style: GoogleFonts.roboto(
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xff6E7370).withOpacity(0.69),
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  )
-                ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailsOfSuggestedScreen(recipe: recipe),
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+        child: Container(
+          width: 200,
+          height: 100,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Color(0xffFDAB7E),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: const Offset(0, 3),
               ),
-            )
+            ]
         ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width:320 ,
+                  child: Text(
+                    recipe.name ?? 'No Name',
+                    maxLines: 2,
+                    overflow: TextOverflow.clip,
+                    style: GoogleFonts.roboto(
+                      fontWeight: FontWeight.w600,
+                      color: const Color(0xff6E7370),
+                      fontSize: 19,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  '${recipe.ingredients?.length ?? 0} ingredients',
+                  style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.w400,
+                    color: const Color(0xff6E7370).withOpacity(0.69),
+                    fontSize: 18,
+                  ),
+                ),
+              ],
+            ),
+          ),
+            ),
       ),
     );
   }
 }
+
+

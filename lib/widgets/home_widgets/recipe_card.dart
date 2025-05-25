@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:university_graduate_project/screens/details_screen.dart';
 import '../../models/recipe_model.dart';
 import '../../network/favourite_service.dart';
@@ -64,8 +65,8 @@ class _RecipeCardState extends State<RecipeCard> {
                     width: 110,
                     child: AutoSizeText(
                       widget.recipe.name ?? "",
-                      style: TextStyle(
-                        fontFamily: 'SansitaOne',
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.bold,
                         fontSize: 12.8,
                         color: Color(0xff666967),
                       ),

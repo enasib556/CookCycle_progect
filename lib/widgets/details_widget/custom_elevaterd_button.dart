@@ -35,8 +35,8 @@ class CustomElevatedButton extends StatelessWidget {
           Text(
             text,
             style:  GoogleFonts.roboto(
-              fontWeight: FontWeight.w500,
-              fontSize: 25,
+              fontWeight: FontWeight.w400,
+              fontSize: 24,
               color: Colors.white,
             ),
           ),

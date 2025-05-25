@@ -43,8 +43,8 @@ class _FavouriteCardState extends State<FavouriteCard> {
                     child: Image.network(
                       widget.recipe.imageUrl!,
                       width: 140,
-                      height: 130,
-                      fit: BoxFit.fill,
+                      height: 120,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -57,8 +57,8 @@ class _FavouriteCardState extends State<FavouriteCard> {
                         Padding(
                           padding: const EdgeInsets.only(right: 30),
                           child: Text( widget.recipe.name!,
-                          style: TextStyle(
-                            fontFamily: 'SansitaOne',
+                          style: GoogleFonts.roboto(
+                            fontWeight: FontWeight.bold,
                             fontSize: 18,
                             color: Color(0xff6E7370),
                           ),
@@ -77,14 +77,13 @@ class _FavouriteCardState extends State<FavouriteCard> {
                         SizedBox(height: 5),
                         Text(
                           widget.recipe.disc!,
-                          maxLines: 3,
+                          maxLines: 4,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.left,
-                          style: GoogleFonts.sansita(
+                          style: GoogleFonts.roboto(
                             color: Colors.grey.withOpacity(0.8),
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.italic,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],

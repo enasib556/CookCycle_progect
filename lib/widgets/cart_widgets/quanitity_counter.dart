@@ -3,7 +3,8 @@ import '../../utilis/color.dart';
 import 'custom_container.dart';
 
 class QuanitityCounter extends StatefulWidget {
-  const QuanitityCounter({super.key});
+  final String quantity;
+  const QuanitityCounter({super.key, required this.quantity});
 
   @override
   State<QuanitityCounter> createState() => _QuanitityCounterState();

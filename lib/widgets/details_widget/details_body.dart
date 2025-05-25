@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:university_graduate_project/widgets/details_widget/steps_list.dart';
 import 'package:university_graduate_project/widgets/details_widget/time_recipe.dart';
 import '../../models/recipe_model.dart';
@@ -27,8 +28,8 @@ class DetailsBody extends StatelessWidget {
                 LabelIngredientButton(recipe: recipe,),
                 Text(
                   'Steps to Prepare ${recipe.name}',
-                  style: TextStyle(
-                    fontFamily: 'SansitaOne',
+                  style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.bold,
                     fontSize: 23,
                     color: AuthColorButton,
                   ),

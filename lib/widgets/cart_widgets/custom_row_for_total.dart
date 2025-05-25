@@ -16,7 +16,7 @@ class CustomRowForTotal extends StatelessWidget {
           padding: const EdgeInsets.only(left: 16.0),
           child: Text(
             text,
-            style: GoogleFonts.sansita(
+            style: GoogleFonts.roboto(
               fontSize: 28,
               fontWeight: FontWeight.bold,
               color: colorIconCart,
@@ -28,7 +28,7 @@ class CustomRowForTotal extends StatelessWidget {
           padding: const EdgeInsets.only(right: 16.0),
           child: Text(
             '\$$price',
-            style: GoogleFonts.sansita(
+            style: GoogleFonts.roboto(
               fontSize: 28,
               fontWeight: FontWeight.bold,
               color: colorIconCart,

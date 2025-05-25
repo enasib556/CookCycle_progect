@@ -11,7 +11,7 @@ class RecipeName extends StatelessWidget {
       "Apple & Walnut Salad",
       style: GoogleFonts.roboto(
         color: AuthColorButton,
-        fontSize: 32,
+        fontSize: 26,
         fontWeight: FontWeight.w900,
       ),
     );

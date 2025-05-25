@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../models/recipe_model.dart';
 import '../../utilis/color.dart';
 
@@ -20,7 +21,7 @@ class DescriptinBox extends StatelessWidget {
           child: Center(
             child: Text(
               recipe.smallDisc!,
-              style: TextStyle(
+              style: GoogleFonts.roboto(
                 fontSize: 22,
                 color: Color(0xFF6E7370).withOpacity(0.7),
                 fontWeight: FontWeight.w400,

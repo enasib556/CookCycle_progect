@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../models/recipe_model.dart';
-import 'name_price_column.dart';
 import 'quanitity_counter.dart';
 import '../../utilis/color.dart'; // تأكد إن عندك ملف الألوان
 
@@ -119,9 +118,8 @@ class CartItem extends StatelessWidget {
                 ),
               ),
             ),
-
             // ✅ العداد
-            const QuanitityCounter(),
+            QuanitityCounter(quantity: ingredient.quantity ?? "1"),
             const SizedBox(width: 17),
           ],
         ),

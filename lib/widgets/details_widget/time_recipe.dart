@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../models/recipe_model.dart';
 import '../../utilis/color.dart';
 
@@ -17,8 +18,8 @@ class TimeRecipe extends StatelessWidget {
           const SizedBox(width: 5),
           Text(
             '${recipe.duration} ',
-            style: TextStyle(
-              fontFamily: 'SansitaOne',
+            style: GoogleFonts.roboto(
+              fontWeight: FontWeight.w800,
               fontSize: 18,
               color: AuthColorButton,
             ),

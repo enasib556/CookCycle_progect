@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:university_graduate_project/screens/login_screen.dart';
 import 'package:university_graduate_project/utilis/assets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../screens/sign_up_screen.dart';
 import '../../utilis/color.dart';
 import '../general_widgets/custom_appbar.dart';
 import 'data_user.dart';
@@ -134,9 +134,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               onTap: _logout,
               child: Row(
                 children: [
-                  Icon(Icons.logout, color: AuthColorButton, size: 35),
+                  Icon(Icons.logout, color: Color(0xffFF0004), size: 35),
                   const SizedBox(width: 15),
-                  Text('Logout', style: TextStyle(fontFamily: 'SansitaOne', fontSize: 18)),
+                  Text('Logout', style: GoogleFonts.roboto(
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xffFF0004),
+                  fontSize: 18)),
                 ],
               ),
             ),

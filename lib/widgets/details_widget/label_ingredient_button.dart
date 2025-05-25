@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/recipe_model.dart';
 import '../../utilis/color.dart';
@@ -104,9 +105,9 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
       child: Column(
         children: [
           Text(
-            'Main Ingredients for Classic Caesar Chicken',
-            style: TextStyle(
-              fontFamily: 'SansitaOne',
+            'Main Ingredients for ${widget.recipe.name}',
+            style: GoogleFonts.roboto(
+              fontWeight: FontWeight.bold,
               fontSize: 23,
               color: AuthColorButton,
             ),

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:chat_bubbles/bubbles/bubble_normal_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../utilis/color.dart';
 
@@ -109,8 +110,8 @@ class _MessageContainerState extends State<MessageContainer> {
           widget.type == "text"
               ? Text(
             widget.message,
-            style: TextStyle(
-              fontFamily: 'SansitaOne',
+            style: GoogleFonts.roboto(
+              fontWeight: FontWeight.bold,
               color: widget.isSender ? Colors.grey.shade700 : Colors.white,
               fontSize: 15,
             ),

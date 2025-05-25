@@ -11,19 +11,19 @@ class IngredientsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.symmetric(vertical: 14.0,horizontal: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // العنوان
           Row(
             children: [
-              Icon(Icons.list_alt_rounded, color: Colors.orange,size: 35,),
+              Icon(Icons.list_alt_rounded, color: Colors.orange,size: 30,),
               SizedBox(width: 8),
               Text(
                 'Ingredients',
                 style: GoogleFonts.roboto(
-                  fontSize: 36,
+                  fontSize: 26,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF3E715B),
                 ),
@@ -35,7 +35,7 @@ class IngredientsWidget extends StatelessWidget {
           // قائمة المكونات
           ...staticIngredients.map(
                 (item) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              padding: const EdgeInsets.symmetric(vertical: 5.0),
               child: Row(
                 children: [
                   Icon(Icons.circle, color: Colors.orange.shade300, size: 10),
@@ -43,7 +43,8 @@ class IngredientsWidget extends StatelessWidget {
                   Flexible(
                     child: Text(
                       item,
-                      style: TextStyle(
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w400,
                         fontSize: 16,
                         color: Color(0xFF3E3E3E),
                       ),
@@ -53,8 +54,6 @@ class IngredientsWidget extends StatelessWidget {
               ),
             ),
           ),
-
-
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../utilis/color.dart';
 
 class CustomButton extends StatelessWidget {
@@ -20,9 +21,8 @@ class CustomButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: TextStyle(
-              fontFamily: 'SansitaOne',
-              fontWeight: FontWeight.bold,
+            style: GoogleFonts.roboto(
+              fontWeight: FontWeight.w900,
               fontSize: 20,
               color: Colors.white,
             ),

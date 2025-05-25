@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../utilis/color.dart';
 
 class DataUser extends StatelessWidget {
@@ -22,14 +23,17 @@ class DataUser extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(
+                style: GoogleFonts.roboto(
+                  fontWeight: FontWeight.w400,
                   fontSize: 19,
                   color: Color(0xff6E7370).withOpacity(0.71),
                 ),
               ),
               Text(
                 value,
-                style: TextStyle(fontFamily: 'SansitaOne', fontSize: 16),
+                style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
               ),
             ],
           ),

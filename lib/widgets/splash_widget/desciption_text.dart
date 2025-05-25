@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:university_graduate_project/utilis/color.dart';
 
 class DesciptionText extends StatelessWidget {
@@ -12,16 +13,16 @@ class DesciptionText extends StatelessWidget {
         children: [
           Text(
             'Powered by AI',
-            style: TextStyle(
-              fontSize: 22,
+            style: GoogleFonts.roboto(
+              fontSize: 24,
               fontWeight: FontWeight.w400,
               color: newColor.withOpacity(0.63),
             ),
           ),
           Text(
             'Smart Cooking Starts Here!',
-            style: TextStyle(
-              fontSize: 22,
+            style: GoogleFonts.roboto(
+              fontSize: 24,
               fontWeight: FontWeight.w400,
               color: newColor.withOpacity(0.63),
             ),

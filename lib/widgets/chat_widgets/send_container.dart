@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:university_graduate_project/utilis/color.dart';
 
 class SendContainer extends StatelessWidget {
@@ -65,8 +66,7 @@ class SendContainer extends StatelessWidget {
                           maxLines: null,
                           decoration:  InputDecoration(
                             hintText: "Type your message",
-                            hintStyle: TextStyle(
-                              fontFamily: 'SansitaOne',
+                            hintStyle: GoogleFonts.roboto(
                               color: Colors.grey.shade600,
                               fontSize: 14,
                             ),
