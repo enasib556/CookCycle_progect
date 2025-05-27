@@ -73,10 +73,9 @@ class StepModel {
     'Image_url': imageUrl,
   };
 }
-
 class Ingredient {
   int? ingredientId;
-  int? recipeId; // ← NEW
+  int? recipeId;
   String? name;
   String? price;
   String? imageUrl;
@@ -85,7 +84,7 @@ class Ingredient {
 
   Ingredient({
     this.ingredientId,
-    this.recipeId, // ← NEW
+    this.recipeId,
     this.name,
     this.price,
     this.imageUrl,
@@ -93,23 +92,33 @@ class Ingredient {
     this.isSelected = false,
   });
 
-  Ingredient.fromJson(Map<String, dynamic> json)
-      : ingredientId = json['Ingredient_id'],
-        recipeId = json['Recipe_id'], // ← NEW
-        name = json['Name'],
-        price = json['Price']?.toString() ?? '',
-        imageUrl = json['Image_url'],
-        quantity = json['Quantity'],
-        isSelected = json['isSelected'] ?? false;
+  factory Ingredient.fromJson(Map<String, dynamic> json) {
+    return Ingredient(
+      ingredientId: json['Ingredient_id'],
+      recipeId: json['Recipe_id'],
+      name: json['Name'],
+      price: json['Price']?.toString() ?? '',
+      imageUrl: json['Image_url'],
+      quantity: json['Quantity'],
+      isSelected: json['isSelected'] ?? false,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     'Ingredient_id': ingredientId,
-    'Recipe_id': recipeId, // ← NEW
+    'Recipe_id': recipeId,
     'Name': name,
     'Price': price,
     'Image_url': imageUrl,
     'Quantity': quantity,
     'isSelected': isSelected,
   };
-}
 
+  static double? _parsePrice(dynamic price) {
+    if (price == null) return null;
+    if (price is double) return price;
+    if (price is int) return price.toDouble();
+    if (price is String) return double.tryParse(price);
+    return null;
+  }
+}

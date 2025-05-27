@@ -1,17 +1,52 @@
 import 'package:flutter/material.dart';
-import '../../models/recipe_model.dart';
+import '../../models/recipe_model.dart';  // تأكد أن هنا Ingredient موجود
 import 'quanitity_counter.dart';
-import '../../utilis/color.dart'; // تأكد إن عندك ملف الألوان
+import '../../utilis/color.dart';
 
-class CartItem extends StatelessWidget {
+class CartItem extends StatefulWidget {
   final Ingredient ingredient;
-  final Function loadShoppingList; // الدالة التي ستقوم بتحميل قائمة التسوق بعد التعديل
+  final Function loadShoppingList;
+  final Function(int) onQuantityChanged;  // جديد
+  final VoidCallback onDelete;  // جديد
 
+  const CartItem({
+    Key? key,
+    required this.ingredient,
+    required this.loadShoppingList,
+    required this.onQuantityChanged,  // جديد
+    required this.onDelete,           // جديد
+  }) : super(key: key);
 
-  const CartItem({super.key, required this.ingredient, required this.loadShoppingList,});
+  @override
+  State<CartItem> createState() => _CartItemState();
+}
+
+class _CartItemState extends State<CartItem> {
+  int quantity = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    quantity = int.tryParse(widget.ingredient.quantity ?? "1") ?? 1;
+  }
+
+  void updateQuantity(int newQuantity) {
+    setState(() {
+      quantity = newQuantity;
+    });
+  }
+
+  double calculateTotalPrice(String? price, int quantity) {
+    final unitPrice = double.tryParse(
+      price?.replaceAll(RegExp(r'[^\d.]'), '') ?? "0",
+    ) ?? 0;
+    return unitPrice * quantity;
+  }
 
   @override
   Widget build(BuildContext context) {
+    double totalPrice = calculateTotalPrice(widget.ingredient.price, quantity);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
       child: Container(
@@ -30,14 +65,14 @@ class CartItem extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // ✅ صورة المنتج
             Padding(
               padding: const EdgeInsets.only(left: 12.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: ingredient.imageUrl != null && ingredient.imageUrl!.isNotEmpty
+                child: widget.ingredient.imageUrl != null &&
+                    widget.ingredient.imageUrl!.isNotEmpty
                     ? Image.network(
-                  ingredient.imageUrl!,
+                  widget.ingredient.imageUrl!,
                   width: 98,
                   height: 113,
                   fit: BoxFit.cover,
@@ -49,19 +84,16 @@ class CartItem extends StatelessWidget {
                 ),
               ),
             ),
-
-            // ✅ العمود الخاص بالاسم والسعر والأيقونات
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // الاسم
                     SizedBox(
                       width: 150,
                       child: Text(
-                        ingredient.name ?? '',
+                        widget.ingredient.name ?? '',
                         style: const TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
@@ -71,18 +103,15 @@ class CartItem extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 5),
-                    // السعر
                     Text(
-                      'Price: ${ingredient.price}',
-
+                      "\$${totalPrice.toStringAsFixed(2)}",
                       style: TextStyle(
                         fontSize: 15,
-                        color: Colors.black.withOpacity(0.36),
-                        fontWeight: FontWeight.w400,
+                        color: Colors.black.withOpacity(0.7),
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     const Spacer(),
-                    // الأيقونات: مفضلة وحذف
                     Row(
                       children: [
                         Container(
@@ -99,17 +128,23 @@ class CartItem extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 20),
-                        Container(
-                          width: 35,
-                          height: 35,
-                          decoration: BoxDecoration(
-                            color: colorCard,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Icon(
-                            Icons.delete,
-                            size: 24,
-                            color: colorIconCart,
+                        GestureDetector(
+                          onTap: () {
+                            // مثلا استدعاء دالة الحذف هنا
+                            widget.loadShoppingList();
+                          },
+                          child: Container(
+                            width: 35,
+                            height: 35,
+                            decoration: BoxDecoration(
+                              color: colorCard,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Icon(
+                              Icons.delete,
+                              size: 24,
+                              color: colorIconCart,
+                            ),
                           ),
                         ),
                       ],
@@ -118,8 +153,14 @@ class CartItem extends StatelessWidget {
                 ),
               ),
             ),
-            // ✅ العداد
-            QuanitityCounter(quantity: ingredient.quantity ?? "1"),
+            QuanitityCounter(
+              quantity: quantity,
+              onQuantityChanged: (newQuantity) {
+                updateQuantity(newQuantity);
+                widget.onQuantityChanged(newQuantity);  // إبلاغ القائمة الرئيسية
+              },
+            ),
+
             const SizedBox(width: 17),
           ],
         ),

@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../models/recipe_model.dart'; // تأكد انه بيحتوي على Ingredients class
+import '../../models/recipe_model.dart'; // تأكد انه يحتوي على Ingredient class
 import 'cart_item.dart';
 
 class CatListView extends StatefulWidget {
-  const CatListView({super.key});
+  final Function(double)? onSubtotalChanged;
+
+  const CatListView({Key? key, this.onSubtotalChanged}) : super(key: key);
 
   @override
   State<CatListView> createState() => _CatListViewState();
@@ -32,23 +34,50 @@ class _CatListViewState extends State<CatListView> {
       setState(() {
         shoppingList = loadedList;
       });
+
+      // حساب المجموع وإرساله
+      _calculateSubtotal();
     }
   }
 
-  Future<void> deleteIngredient(int index) async {
+  Future<void> saveShoppingList() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? selectedJsonList = prefs.getStringList('shopping_list') ?? [];
+    List<String> jsonList = shoppingList.map((ing) => json.encode(ing.toJson())).toList();
+    await prefs.setStringList('shopping_list', jsonList);
+  }
 
-    // حذف المكون من القائمة
-    selectedJsonList.removeAt(index);
-
-    // حفظ القائمة المحدثة في SharedPreferences
-    await prefs.setStringList('shopping_list', selectedJsonList);
-
-    // تحديث الواجهة بعد الحذف
+  Future<void> deleteIngredient(int index) async {
     setState(() {
       shoppingList.removeAt(index);
     });
+    await saveShoppingList();
+    _calculateSubtotal();
+  }
+
+  // يتم استدعاؤها عند تحديث الكمية من CartItem
+  void updateIngredientQuantity(int index, int newQuantity) {
+    setState(() {
+      shoppingList[index].quantity = newQuantity.toString();
+    });
+    saveShoppingList();
+    _calculateSubtotal();
+  }
+
+  void _calculateSubtotal() {
+    double subtotal = 0;
+    for (var ingredient in shoppingList) {
+      double unitPrice = double.tryParse(
+        ingredient.price?.replaceAll(RegExp(r'[^\d.]'), '') ?? '0',
+      ) ??
+          0;
+      int quantity = int.tryParse(ingredient.quantity ?? '1') ?? 1;
+      subtotal += unitPrice * quantity;
+    }
+
+    // إبلاغ الـ parent عن التغير
+    if (widget.onSubtotalChanged != null) {
+      widget.onSubtotalChanged!(subtotal);
+    }
   }
 
   @override
@@ -64,10 +93,14 @@ class _CatListViewState extends State<CatListView> {
       itemBuilder: (context, index) {
         return CartItem(
           ingredient: shoppingList[index],
-          loadShoppingList: loadShoppingList,  // تمرير الدالة هنا
-           // إضافة حدث الحذف
+          loadShoppingList: loadShoppingList,
+          onQuantityChanged: (newQuantity) {
+            updateIngredientQuantity(index, newQuantity);
+          },
+          onDelete: () {
+            deleteIngredient(index);
+          },
         );
       },
     );
-  }
-}
+  }}

@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../../utilis/color.dart';
 import 'custom_row_for_total.dart';
 
 class SubtotalContainer extends StatelessWidget {
-  const SubtotalContainer({super.key});
+  final double subtotal;
+
+  const SubtotalContainer({
+    super.key,
+    required this.subtotal,
+  });
 
   @override
   Widget build(BuildContext context) {
+    const double delivery = 5.0;
+    final double total = subtotal + delivery;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
@@ -22,11 +28,11 @@ class SubtotalContainer extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              CustomRowForTotal(text: 'Subtotal',price: 20,),
+              CustomRowForTotal(text: 'Subtotal', price: subtotal),
               const Spacer(),
-              CustomRowForTotal(text: 'Delivery',price: 5,),
+              const CustomRowForTotal(text: 'Delivery', price: delivery),
               const Spacer(),
-              CustomRowForTotal(text: 'Total',price: 25,),
+              CustomRowForTotal(text: 'Total', price: total),
               const Spacer(),
             ],
           ),

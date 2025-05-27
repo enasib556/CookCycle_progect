@@ -4,8 +4,22 @@ import 'package:university_graduate_project/widgets/details_widget/custom_elevat
 import '../general_widgets/custom_appbar.dart';
 import 'cat_list_view.dart';
 
-class CartWidget extends StatelessWidget {
+class CartWidget extends StatefulWidget {
   const CartWidget({super.key});
+
+  @override
+  State<CartWidget> createState() => _CartWidgetState();
+}
+
+class _CartWidgetState extends State<CartWidget> {
+  double subtotal = 0;
+
+  // دالة لتحميل المجموع الفرعي
+  void updateSubtotal(double newSubtotal) {
+    setState(() {
+      subtotal = newSubtotal;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +29,11 @@ class CartWidget extends StatelessWidget {
           children: [
             CustomAppbar(title: 'Shopping list', needDeleteButton: false),
             const SizedBox(height: 20),
-            const CatListView(),
+            CatListView(
+              onSubtotalChanged: updateSubtotal,
+            ),
             const SizedBox(height: 23),
-            const SubtotalContainer(),
+            SubtotalContainer(subtotal: subtotal),
             const SizedBox(height: 23),
             SizedBox(
               width: 248,
