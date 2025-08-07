@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../utilis/color.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -35,7 +34,7 @@ class CustomElevatedButton extends StatelessWidget {
           Text(
             text,
             style:  GoogleFonts.roboto(
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w900,
               fontSize: 24,
               color: Colors.white,
             ),

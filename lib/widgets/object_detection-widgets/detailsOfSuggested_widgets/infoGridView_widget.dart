@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../../../models/detect_model.dart';
 import 'infoBox_widget.dart';
 
 class RecipeInfoGridWidget extends StatelessWidget {
-  const RecipeInfoGridWidget({super.key});
+  final RecipesDetect recipe;
+  const RecipeInfoGridWidget({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
@@ -15,26 +17,26 @@ class RecipeInfoGridWidget extends StatelessWidget {
         mainAxisSpacing: 18,
         crossAxisSpacing: 30,
         childAspectRatio: 1.3,
-        children: const [
+        children:  [
           InfoBoxWidget(
             icon: Icons.schedule,
             label: "Prep Time",
-            value: "30m",
+            value: "${recipe.prepTime}",
           ),
           InfoBoxWidget(
             icon: Icons.timer,
             label: "Cook Time",
-            value: "45m",
+            value: "${recipe.cookTime}",
           ),
           InfoBoxWidget(
             icon: Icons.group,
             label: "Servings",
-            value: "4",
+            value: "${recipe.servings}",
           ),
           InfoBoxWidget(
             icon: Icons.restaurant_menu,
             label: "Difficulty",
-            value: "Medium",
+            value: "${recipe.difficulty}",
           ),
         ],
       ),

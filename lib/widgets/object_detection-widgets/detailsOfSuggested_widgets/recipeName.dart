@@ -3,15 +3,16 @@ import 'package:university_graduate_project/utilis/color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RecipeName extends StatelessWidget {
-  const RecipeName ({super.key});
+  final String name;
+  const RecipeName ({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      "Apple & Walnut Salad",
+      name,
       style: GoogleFonts.roboto(
         color: AuthColorButton,
-        fontSize: 26,
+        fontSize: 24,
         fontWeight: FontWeight.w900,
       ),
     );

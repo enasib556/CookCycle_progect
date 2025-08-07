@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:university_graduate_project/utilis/color.dart';
 
 class RecipeImageWidget extends StatelessWidget {
-  const RecipeImageWidget({super.key});
+  final String imagePath;
+  const RecipeImageWidget({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +13,10 @@ class RecipeImageWidget extends StatelessWidget {
       width: 373,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50),
-        child: Image.asset(
-          'assets/images/bacon-with-boiled-egg--e1629740588775.png',
-          height: 383,
-          width: 373,
+        child:Image.file(
+          File(imagePath),
+          width: 364,
+          height: 320,
           fit: BoxFit.fill,
         ),
       ),

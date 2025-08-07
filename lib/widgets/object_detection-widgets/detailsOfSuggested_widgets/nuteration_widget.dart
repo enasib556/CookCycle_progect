@@ -1,12 +1,12 @@
 // ingredients_widget.dart
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:university_graduate_project/widgets/object_detection-widgets/detailsOfSuggested_widgets/static_data.dart';
-
+import '../../../models/detect_model.dart';
+import 'nutrition_item.dart';
 
 class NutritionalWidget extends StatelessWidget {
-  const NutritionalWidget({super.key});
+  final NutritionDetect nutrition;
+  const NutritionalWidget({super.key, required this.nutrition});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,6 @@ class NutritionalWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // العنوان
           Row(
             children: [
               Icon(Icons.list_alt_rounded, color: Colors.orange,size: 30,),
@@ -31,30 +30,10 @@ class NutritionalWidget extends StatelessWidget {
             ],
           ),
           SizedBox(height: 16),
-
-          // قائمة المكونات
-          ...staticNuteration.map(
-                (item) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0),
-              child: Row(
-                children: [
-                  Icon(Icons.info_rounded, color: Colors.orange.shade300, size: 10),
-                  SizedBox(width: 8),
-                  Flexible(
-                    child: Text(
-                      item,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xFF3E3E3E),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-
-
+          NutritionItem(nutrition: "Calories : ${nutrition.calories} kcal",),
+          NutritionItem(nutrition: "Protein : ${nutrition.protein} ",),
+          NutritionItem(nutrition: "Carbs : ${nutrition.carbs} ",),
+          NutritionItem(nutrition: "Fat : ${nutrition.fat}",),
         ],
       ),
     );

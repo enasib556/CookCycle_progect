@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:university_graduate_project/utilis/color.dart';
 
@@ -7,7 +6,7 @@ class SendContainer extends StatelessWidget {
   final TextEditingController messageController;
   final VoidCallback sendMessage;
   final VoidCallback toggleRecording;
-  final VoidCallback showOption;
+  // final VoidCallback showOption;
   final bool isRecording;
 
   const SendContainer({
@@ -15,7 +14,7 @@ class SendContainer extends StatelessWidget {
     required this.messageController,
     required this.sendMessage,
     required this.toggleRecording,
-    required this.showOption,
+    // required this.showOption,
     required this.isRecording,
   });
 
@@ -39,17 +38,17 @@ class SendContainer extends StatelessWidget {
           child: Row(
             children: [
               const SizedBox(width: 5),
-              CircleAvatar(
-                radius: 20,
-                backgroundColor: Colors.white,
-                child: IconButton(
-                  icon: isRecording
-                      ? const Icon(Icons.stop, color: Color(0xFF00643A), size: 24)
-                      : const Icon(Icons.mic, color: Color(0xFF00643A), size: 24),
-                  onPressed: toggleRecording,
-                ),
-              ),
-              const SizedBox(width: 10),
+              // CircleAvatar(
+              //   radius: 20,
+              //   backgroundColor: Colors.white,
+              //   child: IconButton(
+              //     icon: isRecording
+              //         ? const Icon(Icons.stop, color: Color(0xFF00643A), size: 24)
+              //         : const Icon(Icons.mic, color: Color(0xFF00643A), size: 24),
+              //     onPressed: toggleRecording,
+              //   ),
+              // ),
+              // const SizedBox(width: 10),
               Expanded(
                 child: Container(
                   constraints: const BoxConstraints(minHeight: 42),
@@ -74,10 +73,6 @@ class SendContainer extends StatelessWidget {
                           ),
                           style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.49)),
                         ),
-                      ),
-                      IconButton(
-                        icon: SvgPicture.asset('assets/icons/Vector.svg'),
-                        onPressed: showOption,
                       ),
                     ],
                   ),

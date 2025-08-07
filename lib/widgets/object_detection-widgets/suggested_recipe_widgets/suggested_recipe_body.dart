@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:university_graduate_project/widgets/object_detection-widgets/suggested_recipe_widgets/custom_imgae.dart';
-
 import '../../../utilis/color.dart';
 import '../../general_widgets/custom_appbar_for_objectDe.dart';
 import 'suggested_list.dart';

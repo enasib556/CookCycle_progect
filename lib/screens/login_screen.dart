@@ -11,7 +11,6 @@ import '../utilis/assets.dart';
 import '../widgets/auths_widgets/custom_button.dart';
 import '../widgets/auths_widgets/custom_text_field.dart';
 import 'sign_up_screen.dart';
- // استيراد الـ AuthResponse
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,7 +18,6 @@ class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
-
 class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -30,14 +28,10 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) async {
         if (state is LoginSuccessState) {
-          // استجابة الـ Login
-          AuthResponse authResponse = state.authResponse; // الحصول على استجابة التوثيق
+          AuthResponse authResponse = state.authResponse;
           if (authResponse.success) {
-            // حفظ التوكن في SharedPreferences
             SharedPreferences prefs = await SharedPreferences.getInstance();
-            prefs.setString('token', authResponse.token ?? ''); // تخزين التوكن
-
-            // الانتقال إلى الشاشة الرئيسية
+            prefs.setString('token', authResponse.token ?? '');
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => HomeScreen()),

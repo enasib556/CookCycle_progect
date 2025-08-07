@@ -1,12 +1,10 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:record/record.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:university_graduate_project/widgets/chat_widgets/send_container.dart';
 import 'massege_container.dart';
 
@@ -40,51 +38,6 @@ class _CustomChatState extends State<CustomChat> {
         });
       });
     });
-  }
-
-  void _showOption() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title:  Text(
-          'choose image source',
-          style: GoogleFonts.roboto(
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF00643A),
-            fontSize: 20,
-          ),
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.image, color: Color(0xFF00643A)),
-              title:  Text('gallery', style: GoogleFonts.roboto(
-                fontWeight: FontWeight.w400,
-                color: Color(0xFF00643A),
-                fontSize: 15
-              )),
-              onTap: () {
-                Navigator.pop(context);
-                pickImage(ImageSource.gallery);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.camera, color: Color(0xFF00643A)),
-              title:  Text('camera', style: GoogleFonts.roboto(
-                fontWeight: FontWeight.w400,
-                color: Color(0xFF00643A),
-                fontSize: 15,
-              )),
-              onTap: () {
-                Navigator.pop(context);
-                pickImage(ImageSource.camera);
-              },
-            ),
-          ],
-        ),
-      ),
-    );
   }
 
   void sendMessage() {
@@ -241,7 +194,7 @@ class _CustomChatState extends State<CustomChat> {
           sendMessage: sendMessage,
           toggleRecording: _toggleRecording,
           isRecording: _isRecording,
-          showOption: _showOption,
+          // showOption: _showOption,
         ),
       ],
     );

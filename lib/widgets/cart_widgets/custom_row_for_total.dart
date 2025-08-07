@@ -27,7 +27,7 @@ class CustomRowForTotal extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 16.0),
           child: Text(
-            '\$$price',
+            "\$${price.toStringAsFixed(2)}",
             style: GoogleFonts.roboto(
               fontSize: 28,
               fontWeight: FontWeight.bold,

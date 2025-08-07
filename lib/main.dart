@@ -2,22 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:university_graduate_project/manager/auth_cubit/login_cubit.dart';
 import 'package:university_graduate_project/manager/auth_cubit/register_cubit.dart';
-import 'package:university_graduate_project/screens/detailsOfSuggested_screen.dart';
 import 'package:university_graduate_project/screens/splash_screen.dart';
 import 'package:university_graduate_project/screens/home_screen.dart';
 import 'package:university_graduate_project/utilis/color.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'manager/recipe_cubit/recipe_cubit.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   // تحقق من التوكن المخزن في SharedPreferences
   final prefs = await SharedPreferences.getInstance();
   final token = prefs.getString("token");
-
   runApp(MyApp(isLoggedIn: token != null));  // إذا كان هناك توكن، يعتبر المستخدم مسجل دخول
 }
 
@@ -40,5 +36,6 @@ class MyApp extends StatelessWidget {
         home: isLoggedIn ? HomeScreen() : SplashScreen(), // إذا كان مستخدم مسجل دخول، يعرض الشاشة الرئيسية
       ),
     );
+    //
   }
 }

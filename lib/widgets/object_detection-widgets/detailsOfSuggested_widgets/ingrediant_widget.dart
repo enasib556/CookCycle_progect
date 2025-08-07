@@ -2,11 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:university_graduate_project/widgets/object_detection-widgets/detailsOfSuggested_widgets/static_data.dart';
+import '../../../models/detect_model.dart';
 
 
 class IngredientsWidget extends StatelessWidget {
-  const IngredientsWidget({super.key});
+  final List<IngredientsDetect> ingredientsDetect;
+  const IngredientsWidget({super.key, required this.ingredientsDetect});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class IngredientsWidget extends StatelessWidget {
           SizedBox(height: 16),
 
           // قائمة المكونات
-          ...staticIngredients.map(
+          ...ingredientsDetect.map(
                 (item) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 5.0),
               child: Row(
@@ -42,7 +43,7 @@ class IngredientsWidget extends StatelessWidget {
                   SizedBox(width: 8),
                   Flexible(
                     child: Text(
-                      item,
+                      item.name!,
                       style: GoogleFonts.roboto(
                         fontWeight: FontWeight.w400,
                         fontSize: 16,

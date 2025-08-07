@@ -28,20 +28,15 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final ingredients = widget.recipe.ingredients ?? [];
 
-    // إذا لم تكن هناك بيانات مخزنة، نقوم بتعيين كل العناصر كـ false
     List<bool> loadedList = List.generate(
       ingredients.length,
           (index) => prefs.getBool('ingredient_${ingredients[index].ingredientId}') ?? false,
     );
 
-    // تعيين القيمة بعد تحميل البيانات من SharedPreferences
     setState(() {
       selectedIngredients = loadedList;
     });
   }
-
-
-
 
   void updateSelectedIngredients(int index, bool isSelected) async {
     if (selectedIngredients == null || index >= selectedIngredients!.length) return;
@@ -56,8 +51,6 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
     }
   }
 
-
-
   Future<void> saveSelectedToShoppingList() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final ingredients = widget.recipe.ingredients ?? [];
@@ -67,10 +60,13 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
     // Decode the existing list
     List<Ingredient> allIngredients = existingList.map((e) => Ingredient.fromJson(jsonDecode(e))).toList();
 
-    // Remove ingredients with same recipeId to avoid duplicates
-    allIngredients.removeWhere((i) => i.recipeId == widget.recipe.recipeId);
+    // حذف المكونات اللي لها نفس recipeId + ingredientId (لضمان ما فيش تكرار)
+    for (var ing in ingredients) {
+      allIngredients.removeWhere((i) =>
+      i.recipeId == widget.recipe.recipeId && i.ingredientId == ing.ingredientId);
+    }
 
-    // Add new selected ingredients
+    // إضافة المكونات المختارة
     for (int i = 0; i < ingredients.length; i++) {
       if (selectedIngredients![i]) {
         Ingredient ing = ingredients[i];
@@ -78,17 +74,13 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
         allIngredients.add(ing);
       }
     }
-
-    // Convert back to JSON and save
+    // حفظ القائمة مرة تانية
     List<String> updatedList = allIngredients.map((i) => jsonEncode(i.toJson())).toList();
     await prefs.setStringList('shopping_list', updatedList);
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Ingredients added to cart!')),
     );
-
-    // بعد إضافة المكونات إلى السلة، نرجع للقائمة الرئيسية مع التحديث
-     // هنا نرسل النتيجة
   }
 
 
@@ -98,8 +90,7 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
       return const Center(child: CircularProgressIndicator());
     }
 
-    // حساب عدد العناصر المختارة
-    final selectedCount = selectedIngredients!.where((e) => e).length;
+    final selectedCount = {...selectedIngredients!.asMap().entries.where((e) => e.value).map((e) => e.key)}.length-1;
 
     return SingleChildScrollView(
       child: Column(
@@ -119,10 +110,10 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
           ),
           const SizedBox(height: 10),
           SizedBox(
-            width: MediaQuery.of(context).size.width  ,
+            width: MediaQuery.of(context).size.width,
             height: 66,
             child: CustomElevatedButton(
-              text: 'Add To Shopping List${selectedCount > 0 ? '($selectedCount)' : ''}',  // عرض عدد العناصر المختارة
+              text: 'Add To Shopping List',
               onPress: () {
                 if (selectedCount == 0) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -132,10 +123,41 @@ class _LabelIngredientButtonState extends State<LabelIngredientButton> {
                   saveSelectedToShoppingList();
                 }
               },
-              icon: const Icon(
-                Icons.shopping_cart_outlined,
-                color: Colors.white,
-                size: 30,
+              icon: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  const Icon(
+                    Icons.shopping_cart_outlined,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  if (selectedCount > 0)
+                    Positioned(
+                      right: 0,
+                      top: -10,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Color(0xFFF8844A),
+                          shape: BoxShape.circle,
+                        ),
+                        constraints: const BoxConstraints(
+                          minWidth: 20,
+                          minHeight: 20,
+                        ),
+                        child: Center(
+                          child: Text(
+                            '$selectedCount',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
           ),

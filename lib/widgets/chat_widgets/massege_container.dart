@@ -81,6 +81,69 @@ class _MessageContainerState extends State<MessageContainer> {
     });
   }
 
+  List<InlineSpan> _formatText(String text) {
+    final List<InlineSpan> spans = [];
+
+    final RegExp pattern = RegExp(
+      r'(###\s?.+|\*\*[^*]+\*\*|---|\*\*\*|___|\n|[^\*#_\n]+)',
+      multiLine: true,
+    );
+
+    final matches = pattern.allMatches(text);
+
+    for (final match in matches) {
+      final String matchText = match.group(0)!;
+
+      if (matchText.startsWith('###')) {
+        // عنوان
+        spans.add(TextSpan(
+          text: matchText.replaceFirst('###', '').trim() + '\n',
+          style: GoogleFonts.roboto(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: widget.isSender ? Colors.grey.shade700 : Colors.white,
+          ),
+        ));
+      } else if (matchText.startsWith('**') && matchText.endsWith('**')) {
+        // نص بولد
+        spans.add(TextSpan(
+          text: matchText.replaceAll('**', ' '),
+          style: GoogleFonts.roboto(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: widget.isSender ? Colors.grey.shade700 : Colors.white,
+          ),
+        ));
+      } else if (matchText.trim() == '---' ||
+          matchText.trim() == '***' ||
+          matchText.trim() == '___') {
+        // خط فاصل
+        spans.add(WidgetSpan(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Divider(
+              thickness: 1.5,
+              color: Colors.white,
+            ),
+          ),
+        ));
+      } else if (matchText == '\n') {
+        spans.add(const TextSpan(text: '\n'));
+      } else {
+        // نص عادي
+        spans.add(TextSpan(
+          text: matchText,
+          style: GoogleFonts.roboto(
+            fontSize: 14.5,
+            fontWeight: FontWeight.normal,
+            color: widget.isSender ? Colors.grey.shade700 : Colors.white,
+          ),
+        ));
+      }
+    }
+    return spans;
+  }
+
   // Seek the audio to a specific position
   void _changeSeek(double value) {
     setState(() {
@@ -108,12 +171,9 @@ class _MessageContainerState extends State<MessageContainer> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           widget.type == "text"
-              ? Text(
-            widget.message,
-            style: GoogleFonts.roboto(
-              fontWeight: FontWeight.bold,
-              color: widget.isSender ? Colors.grey.shade700 : Colors.white,
-              fontSize: 15,
+              ? RichText(
+            text: TextSpan(
+              children: _formatText(widget.message),
             ),
           )
               : widget.type == "audio"

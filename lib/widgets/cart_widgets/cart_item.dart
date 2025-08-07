@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import '../../models/recipe_model.dart';  // تأكد أن هنا Ingredient موجود
+import '../../models/recipe_model.dart'; // تأكد أن هنا Ingredient موجود
 import 'quanitity_counter.dart';
-import '../../utilis/color.dart';
 
 class CartItem extends StatefulWidget {
   final Ingredient ingredient;
   final Function loadShoppingList;
-  final Function(int) onQuantityChanged;  // جديد
-  final VoidCallback onDelete;  // جديد
+  final Function(int) onQuantityChanged; // جديد
+  final VoidCallback onDelete; // جديد
 
   const CartItem({
     Key? key,
     required this.ingredient,
     required this.loadShoppingList,
-    required this.onQuantityChanged,  // جديد
-    required this.onDelete,           // جديد
+    required this.onQuantityChanged, // جديد
+    required this.onDelete, // جديد
   }) : super(key: key);
 
   @override
@@ -37,9 +36,8 @@ class _CartItemState extends State<CartItem> {
   }
 
   double calculateTotalPrice(String? price, int quantity) {
-    final unitPrice = double.tryParse(
-      price?.replaceAll(RegExp(r'[^\d.]'), '') ?? "0",
-    ) ?? 0;
+    final unitPrice =
+        double.tryParse(price?.replaceAll(RegExp(r'[^\d.]'), '') ?? "0") ?? 0;
     return unitPrice * quantity;
   }
 
@@ -63,105 +61,85 @@ class _CartItemState extends State<CartItem> {
             ),
           ],
         ),
-        child: Row(
+        child: Stack(
+          clipBehavior: Clip.none,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 12.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: widget.ingredient.imageUrl != null &&
-                    widget.ingredient.imageUrl!.isNotEmpty
-                    ? Image.network(
-                  widget.ingredient.imageUrl!,
-                  width: 98,
-                  height: 113,
-                  fit: BoxFit.cover,
-                )
-                    : const SizedBox(
-                  width: 98,
-                  height: 113,
-                  child: Icon(Icons.image, size: 50),
+            Positioned(
+              top: -5,
+              right: 0,
+              child: IconButton(
+                onPressed: widget.onDelete,
+                icon: const Icon(Icons.clear, color: Color(0xFF00643A),
+                size: 16,
                 ),
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 150,
-                      child: Text(
-                        widget.ingredient.name ?? '',
-                        style: const TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      "\$${totalPrice.toStringAsFixed(2)}",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black.withOpacity(0.7),
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const Spacer(),
-                    Row(
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 12.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child:
+                        widget.ingredient.imageUrl != null &&
+                                widget.ingredient.imageUrl!.isNotEmpty
+                            ? Image.network(
+                              widget.ingredient.imageUrl!,
+                              width: 98,
+                              height: 113,
+                              fit: BoxFit.cover,
+                            )
+                            : const SizedBox(
+                              width: 98,
+                              height: 113,
+                              child: Icon(Icons.image, size: 50),
+                            ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          width: 35,
-                          height: 35,
-                          decoration: BoxDecoration(
-                            color: colorCard,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Icon(
-                            Icons.favorite_border,
-                            size: 24,
-                            color: colorIconCart,
+                        const SizedBox(width: 17),
+                        SizedBox(
+                          width: 350,
+                          child: Text(
+                            widget.ingredient.name ?? '',
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        const SizedBox(width: 20),
-                        GestureDetector(
-                          onTap: () {
-                            // مثلا استدعاء دالة الحذف هنا
-                            widget.loadShoppingList();
-                          },
-                          child: Container(
-                            width: 35,
-                            height: 35,
-                            decoration: BoxDecoration(
-                              color: colorCard,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Icon(
-                              Icons.delete,
-                              size: 24,
-                              color: colorIconCart,
-                            ),
+                        const SizedBox(height: 5),
+                        Text(
+                          "\$${totalPrice.toStringAsFixed(2)}",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black.withOpacity(0.7),
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+                QuanitityCounter(
+                  quantity: quantity,
+                  onQuantityChanged: (newQuantity) {
+                    updateQuantity(newQuantity);
+                    widget.onQuantityChanged(
+                      newQuantity,
+                    );
+                  },
+                ),
+              ],
             ),
-            QuanitityCounter(
-              quantity: quantity,
-              onQuantityChanged: (newQuantity) {
-                updateQuantity(newQuantity);
-                widget.onQuantityChanged(newQuantity);  // إبلاغ القائمة الرئيسية
-              },
-            ),
-
-            const SizedBox(width: 17),
           ],
         ),
       ),

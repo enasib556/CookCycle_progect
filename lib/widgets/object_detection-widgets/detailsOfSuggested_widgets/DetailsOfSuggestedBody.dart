@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:university_graduate_project/widgets/object_detection-widgets/detailsOfSuggested_widgets/recipeName.dart';
+import '../../../models/detect_model.dart';
 import '../../details_widget/custom_elevaterd_button.dart';
 import '../../general_widgets/custom_appbar_for_objectDe.dart';
 import 'Instructions_widget.dart';
@@ -10,7 +11,9 @@ import 'ingrediant_widget.dart';
 import 'nuteration_widget.dart';
 
 class DetailsOfSuggestedBody extends StatelessWidget {
-  const DetailsOfSuggestedBody({super.key});
+  final RecipesDetect recipe;
+  final String imagePath;
+  const DetailsOfSuggestedBody({super.key, required this.recipe, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +33,15 @@ class DetailsOfSuggestedBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children:  [
-                RecipeName(),
+                RecipeName(name: recipe.name!,),
                 SizedBox(height: 10),
-                RecipeImageWidget(),
-                RecipeInfoGridWidget(),
-                IngredientsWidget(),
-                EquipmentsWidget(),
-                InstructionsWidget(),
-                NutritionalWidget(),
+                RecipeImageWidget(imagePath: imagePath,),
+                SizedBox(height: 10),
+                RecipeInfoGridWidget(recipe: recipe,),
+                IngredientsWidget(ingredientsDetect: recipe.ingredients!,),
+                EquipmentsWidget(equipments: recipe.equipment!,),
+                InstructionsWidget(Instructions: recipe.steps!,),
+                NutritionalWidget(nutrition: recipe.nutrition!,),
                 SizedBox(height: 10),
                 SizedBox(
                   height: 50,

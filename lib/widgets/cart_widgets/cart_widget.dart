@@ -14,7 +14,6 @@ class CartWidget extends StatefulWidget {
 class _CartWidgetState extends State<CartWidget> {
   double subtotal = 0;
 
-  // دالة لتحميل المجموع الفرعي
   void updateSubtotal(double newSubtotal) {
     setState(() {
       subtotal = newSubtotal;
@@ -27,7 +26,9 @@ class _CartWidgetState extends State<CartWidget> {
       child: SafeArea(
         child: Column(
           children: [
-            CustomAppbar(title: 'Shopping list', needDeleteButton: false),
+            CustomAppbar(title: 'Shopping list', needDeleteButton: false,
+            needSearchButton: false,
+            ),
             const SizedBox(height: 20),
             CatListView(
               onSubtotalChanged: updateSubtotal,

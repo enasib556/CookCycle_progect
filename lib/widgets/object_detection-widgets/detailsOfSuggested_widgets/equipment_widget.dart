@@ -1,12 +1,10 @@
 // ingredients_widget.dart
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:university_graduate_project/widgets/object_detection-widgets/detailsOfSuggested_widgets/static_data.dart';
-
 
 class EquipmentsWidget extends StatelessWidget {
-  const EquipmentsWidget({super.key});
+  final List<String> equipments ;
+  const EquipmentsWidget({super.key,required this.equipments});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class EquipmentsWidget extends StatelessWidget {
           SizedBox(height: 16),
 
           // قائمة المكونات
-          ...staticEquipments.map(
+          ...equipments.map(
                 (item) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 5.0),
               child: Row(
@@ -42,7 +40,7 @@ class EquipmentsWidget extends StatelessWidget {
                   SizedBox(width: 8),
                   Flexible(
                     child: Text(
-                      item,
+                     item,
                       style: TextStyle(
                         fontSize: 16,
                         color: Color(0xFF3E3E3E),

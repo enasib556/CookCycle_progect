@@ -28,6 +28,8 @@ class SuggestedList extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: SuggestedCard(
                     recipe: recipes[index],
+                    imagePath: imagePath,
+                    rank: index+1,
                   ),
                 );
               },

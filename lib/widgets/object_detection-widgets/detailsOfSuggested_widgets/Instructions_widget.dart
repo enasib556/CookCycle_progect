@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:university_graduate_project/widgets/object_detection-widgets/detailsOfSuggested_widgets/static_data.dart';
+import '../../../models/detect_model.dart';
 
 class InstructionsWidget extends StatelessWidget {
-  const InstructionsWidget({super.key});
+  final List<StepsDetect> Instructions ;
+  const InstructionsWidget({super.key, required this.Instructions});
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +31,10 @@ class InstructionsWidget extends StatelessWidget {
           SizedBox(height: 16),
 
           // قائمة المعدات مع أرقام بدلاً من الدائرة
-          ...staticInstructions.asMap().entries.map(
+          ...Instructions.asMap().entries.map(
                 (entry) {
               int index = entry.key;
-              String item = entry.value;
+              String item = entry.value.instructions!;
 
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 6.0),

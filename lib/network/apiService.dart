@@ -8,6 +8,6 @@ class ApiService {
 
 class ApiService2 {
   final dio = Dio();
-  static const baseUrl = 'http://172.16.16.9:8001/';
+  static const baseUrl = 'http://172.16.16.9:7000/';
   Future<Response> post(String endpoint, Map<String, dynamic> data) => dio.post(baseUrl + endpoint, data: data);
 }

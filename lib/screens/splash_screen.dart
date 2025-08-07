@@ -26,7 +26,6 @@ class _SplashScreenState extends State<SplashScreen> {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString("token");
 
-    // إذا كان هناك توكن، سيتم التوجيه مباشرة إلى الشاشة الرئيسية
     if (token != null) {
       Future.delayed(Duration(seconds: 5), () {
         Navigator.pushReplacement(
@@ -35,7 +34,6 @@ class _SplashScreenState extends State<SplashScreen> {
         );
       });
     } else {
-      // إذا لم يكن هناك توكن، سيتم التوجيه إلى شاشة تسجيل الدخول
       Future.delayed(Duration(seconds: 5), () {
         Navigator.pushReplacement(
           context,

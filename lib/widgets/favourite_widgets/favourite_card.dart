@@ -77,7 +77,7 @@ class _FavouriteCardState extends State<FavouriteCard> {
                         SizedBox(height: 5),
                         Text(
                           widget.recipe.disc!,
-                          maxLines: 4,
+                          maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.left,
                           style: GoogleFonts.roboto(
